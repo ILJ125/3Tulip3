@@ -1,0 +1,92 @@
+*http://www.jungol.co.kr/ 정올 사이트 문제 많아아
+*For(반복되는 횟수만큼 행 출력/ex 4번반복 4행 즉 4줄 출력{
+	for(반복되는 횟수만큼 열 출력){
+	
+					열내용 출력
+				}
+
+    }
+*제어문 - 프로그램 흐름을 변경하는 문장
+	(1)조건분기문 : if-else
+	(2)선택분기문 : sitch ~ case
+	(3)반복문 : for / while/do~while
+	(4)정지문 : break/continue
+		:break=블록을 벗어나는 것 /continue=블록의 끝으로 가는 문장
+		:break LABEL 모든 중첩된 반복문 나감
+for(초기치;조건문;증가치)
+{
+	반복구문
+}
+---------------------------------------
+초기치
+while(;조건문;)
+{
+	반복 구문
+ 	증가치
+}
+---------------------------------------
+do{
+	반복구문
+}while(조건문);
+---------------------------------------
+*for 초기치를 가장 집어 넣기 좋은 위치는 for문 바로 위에
+
+*for 증가치를 가장 집어 넣기 좋은 위치는 for문 { }안에서 젤 마지막
+
+*for 복습 주사위 합을 입력시 주사위의 경우의 수 구하기 문제
+ 주사위 1개를 for이라고 보고 주사위 2개는 이중 for을 쓰면 된다. 
+
+*while 반복문
+초기치 선언
+while(조건식){
+	반복내용
+	증가치
+}
+*for문은 갯수가 명확하게 정해져있음
+*몇갠지 모르겠지만 반복해야하는 일 while
+*문장에서 뛰어쓰기 기준으로 뜯어 주는거 =StringTokenizer (util 패키지 속함)
+
+ <사용법>
+-StringTokenizer 통로이름 = new StringTokenizer(뛰어쓰기 기준으로 뜯고싶은 데이터가 든 String 변수); 
+-통로이름.hasMoreTokens() ; // 통로에 토큰있으면 True 없으면 False
+-통로이름.nextToken(); //통로에서 토큰 하나를 때올게 ,countTokens에 갯수가 줄어 듭니다.
+-통로이름.countTokens(); //통로에 있는 토큰 갯수
+//Scanner class 랑 같은 방법으로 사용
+
+*StringTokenizer : Scanner 같은 클래스 문장에서 뛰어쓰기 기준으로 뜯어 
+
+*StringTokenizer st = new StringTokenizer(line,"/")
+해석: StringTokenizer를 st 라는 통로로 사용할건데 /line 이라는 변수에 쓰고 싶어 /그런데 /를 기준으로 뜯어줘
+
+*String temp=st.nextToken() ;temp 라는 변수에 뜯어낸걸 저장 할래 
+; 반복문을 써서 StringTokenizer에서 뜯어낸걸 임시로 temp라는 변수에 저장할거야.
+
+*st(=StringTokenizer의 통로).hasMoreTokens() 
+; StringTokenizer를 이용해서 line(문자열 변수)에 있는걸 뜯어내는걸 st라는 통로에 저장했는데, 다음 토큰이 또 있니?
+; boolean형으로 결과값이 나온다  다음토큰 있으면 True 없으면 False
+
+* Ex_while개념 class에 StringTokenizer 내용 저장
+
+*do {   }while(조건문); 
+-조건을 앞에말구 뒤에 입력받고 싶어~ 해서 do while을 사용
+-조건문이 참이면 반복 거짓이면 break;
+
+*do while문은 무조건 한 번은 출력한다.
+
+*tab 정리 ctrl + i
+
+*break Label ;이름이 같은 라벨 뒤에오는 가장 가까운 반복문의 블록을 빠져 나간다.
+ continue Label 
+ //라벨의 이름은 전부 대문자로 해주자.
+ex)
+HERE://Label 뒤에 가장 가까운 반복문을 나간다.
+for(int i=0;i<3;i++) 
+	{
+		for(int j=0;j<3;j++) {
+				
+			if(j==1) break HERE;//HERE 이라는 라벨 바로 뒤에 반복문 블록을 나감
+			if(j==1) continue HERE; //HERE이라는 라벨 바로 뒤에 반복문 블록의 맨끝으로 감
+			}
+		
+
+	}

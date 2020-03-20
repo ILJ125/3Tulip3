@@ -1,0 +1,73 @@
+[행복한 월요일 목표]
+1.제어문-프로그램의  흐름을 변경하는 문장
+ (1) 조건문(오늘)
+  -if문
+  -switch문
+ (2) 반복문(내일)
+ (3) 정지문(내일)
+*컴퓨터는 숫자< 변수 < 숫자  안됩니다.!! &&,||(or)로 쪼개서 입력해줘야 합니다.
+
+*Scanner는 개발창과 콘솔창을 이어주는 통로 입니다. 콘솔에서 입력한걸 개발창으로 보내주는것이 Scanner 
+
+*(조건1)&&(조건2)를 보면 &&는 둘 다 참이어야 참이기 때문에 앞에있는 조건1부터 거짓이면 조건2는 보지도 않는다.
+=Short circuit logic (하나의 조건으로 전체 조건이 판명되면 나머지 조건을 실행하지 않습니다.)
+=Short circuit logic 은 일반 논리에서만 가능해요 (참, 거짓 다루는 일반 논리)
+=Short circuit logic이 어려우면 그냥 이진 논리로 바꿔주세요 그럼 Short circuit logic이 적용이 안됩니다.
+=이진 논리 &, |를 쓰게되면 앞에있는게 참이든, 거짓이든 해서 결과가 나오든 안나오든 조건1과 조건2를 둘 다 적용하게 됩니다.
+
+*조건 &, | 조건 이면 이진논리가 일반논리를 대신한다. Short circuit logic을 적용 안된다.
+
+*^, & 이진 논리가 있으면 &가 먼저  우선순위는 &, ^, | 차례대로 입니다.
+
+*(조건)?A;B  삼항 연산자 조건이 참이면 A 실행 조건이 거짓이면 B 실행
+int 변수 = (a>b)?a:b //a가  b 보다 크면 변수에 a를 대입, 아니면 변수에 b를 대입 (b_ex9_Samhang)
+
+*큰 값, 가장 작은 값 구할 때 3항 연산자 사용
+
+*뒤에있는 값을 앞에 대입해주세요 = 대입 연산자
+a=a+3 == a += 3
+
+*대입 연산자
++= -= *= /= %=
+&= |= ^=
+<<= >>= >>>=
+
+*패키지는 디렉토리명은 전부다 소문자쓰자 (권장)
+
+*프로그램 언어는 숫자를 0부터 세요.
+
+***string에 문자 하나만 가져오는 함수 charAt(7) 
+ 변수.charAt(자리수);자릿수 번째 문자 가져오기
+
+***부분문자열 substring(begingIndext,endindex) beging번째 부터여, end번째 앞에꺼 까지 얻어와요
+String 변수= 추출하고싶은 문자열 변수.substring(0,2) ;맨 앞에서 2번째 앞 즉 1번째 자리까지
+
+***문자열 -> 정수형으로 Integer.parseInt(nai);
+
+*import로 클래스를  불러오기하는 위치는 Package와 클래스 사이
+
+**올해 년도 구하기 calendar 라는 클래스를 쓸것입니다.
+Calendar c =Calendar.getInstance();
+int this_year=c.get(Calendar.YEAR); 
+
+***문자열 비교는 변수1이랑 변수2랑 같니? 변수1.equals(변수2) 이다.
+if(a.equals(b))
+
+**숫자형을 문자형으로 
+String 변수이름 = Double.toString(avg); //double 형을 문자형으로 바꾼것 int형을 바꾸고 싶으면 Integer가 들어가야함
+
+*Switch(변수) // 여기서 뽀인트는 변수 = 조건 으로 정확한 값이어야한다. 상수이거나. 문자이거나, 문자열만 가능하다.
+{case "조건1" : 실행문1 break; //여기서 break를 걸어서 switch문을 나가야한다. 안그러면 default 값이 출력된다.
+case "조건2" : 실행문2 break;
+case "조건3" : 실행문3 break;
+default : 실행문4;//case 외에 다른 조건
+}
+ex)switch(id_major) {			 
+		 case "11": major="컴퓨터학과";break;
+		 case "12": major="소프트웨어학과";break;
+		 case "13": major="모바일학과";break;
+		 case "22": major="자바학과";break;
+		 case "33": major="서버학과";break;
+		 default:major="공대";
+		}
+
