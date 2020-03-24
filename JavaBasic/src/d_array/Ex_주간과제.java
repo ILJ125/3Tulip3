@@ -37,7 +37,7 @@ public class Ex_주간과제 {
 						temp_su++;
 
 					}
-					else if(temp !='o'&temp !='x')//소문자'o',소문자'x'가 아니면 점수를 매기지 못하니 다시 입력받음 
+					else if(temp !='o'&temp !='x'|result[i].length()>80)//소문자'o',소문자'x'가 아니면 점수를 매기지 1 못하니 다시 입력받음 
 					{
 						System.out.println("잘못 입력했습니다. 다시 입력하세요.");
 						System.out.println("----------------------------------------");
