@@ -6,7 +6,8 @@ public class Hello {
 
 		{
 			
-			System.out.println(0%2);
+	double a=(2+2)/3.0;
+	System.out.println(a);
 
 
 		}
