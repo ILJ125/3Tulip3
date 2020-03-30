@@ -1,32 +1,47 @@
+class Parent {
 
+int  i = 7;
+
+public int get() {  return i ; }
+
+}
+
+class Child extends Parent {
+
+int  i = 5 ;
+
+public int get() {  return i ; }
+
+}
 
 public class Test {
 
-	public static void main(String[] args) {
-		int a[][]=new int[][]{{3,-5, 12 }, {-2, 11, 2, -7}, {21, -21, -35, -93, -11}, {9, 14, 39, -98}};
+public static void main ( String [] args ) {
 
-		int sum1[]=new int[a.length];
+   Parent  p = new Parent ();
 
-		int max=0;
-		for(int i=0; i<a.length;i++)
-		{
-			for(int j=0; j<a[i].length;j++)
-			{
-				sum1[i]+=a[i][j];
-			}
-			//System.out.print(sum1[i]+" ");
-		}
+   System.out.println("---------------------1---------------------");
 
-		for(int h=0;h<sum1.length;h++)
-		{
-			if(sum1[h]>max)
-			{
-				max=sum1[h];
-			}
-		}
+   System.out.println( p.i );
 
-		System.out.print(max+" ");
+   System.out.println( p.get( ) );
 
-	}
+Child  c = new Child ();
+
+   System.out.println("---------------------2---------------------");
+
+   System.out.println( c.i );
+
+   System.out.println( c.get( ) );
+
+   Parent  p2 = new Child ();
+
+   System.out.println("---------------------3---------------------");
+
+   System.out.println( p2.i );
+
+   System.out.println( p2.get( ) );
+
+}
 
 }

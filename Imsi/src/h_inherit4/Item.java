@@ -1,6 +1,6 @@
 package h_inherit4;
 
-public class Item {
+public abstract class Item {
 	protected String  number;
 	protected String  title;
 
@@ -14,8 +14,5 @@ public class Item {
 
 	}
 	
-	public void output() {
-		System.out.print(number);
-		System.out.print(","+title);
-	}
+	public abstract void output();
 }
