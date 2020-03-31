@@ -9,7 +9,6 @@ public class Login extends JFrame{
 	
 	//생성자 함수
 	public Login() {
-	
 		//객체 생성
 		tf[0]=new JTextField(10);
 		tf[1]=new JTextField(10);

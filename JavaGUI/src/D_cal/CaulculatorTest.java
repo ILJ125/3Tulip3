@@ -13,7 +13,6 @@ public class CaulculatorTest extends JFrame implements ActionListener{
 	JTextField tf;
 	//2.객체 생성
 	public CaulculatorTest() {
-
 		tf=new JTextField();
 		reset=new JButton();
 		for(int i =0;i<10;i++) {

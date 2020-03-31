@@ -10,7 +10,6 @@ public class NumberGameTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		NumberGame numgame = new NumberGame();
 		numgame.showAnswer();
 

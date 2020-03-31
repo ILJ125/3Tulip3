@@ -7,7 +7,6 @@ import java.awt.*;
 public class InfoTest3 extends JFrame {
 
 	// 1.멤버변수 선언
-
 	JTextArea ta;
 	JButton bAdd,bShow,bSearch,bDelete,bCancel,bExit;
 	JTextField tfName,tfId, tfTel,tfSex,tfAge,tfHome;

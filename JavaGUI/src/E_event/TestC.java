@@ -11,7 +11,6 @@ public class TestC extends JFrame{
 	JButton b ;
 	JTextField tf;
 
-
 	public TestC() {
 		//객체 생성
 		b= new JButton();

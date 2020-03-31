@@ -11,7 +11,6 @@ import E_event.TestA.MyEvent;
 public class TestB extends JFrame implements ActionListener{
 	JButton b ;
 	JTextField tf ;
-	
 	public TestB() {
 		//객체 생성
 		b= new JButton();
