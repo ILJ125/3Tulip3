@@ -7,10 +7,9 @@ public class Food {
 	public Food() {
 		
 	}
-	public Food(String name,int price) {,./
+	public Food(String name,int price) {
 		this.name=name;
 		this.price=price;
-		System.out.println(name+"은 "+price+"원 입니다.");
 	}
 	
 	
