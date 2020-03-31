@@ -5,7 +5,6 @@ public class Food {
 	public int price;
 
 	public Food() {
-		
 	}
 	public Food(String name,int price) {
 		this.name=name;

@@ -11,6 +11,7 @@ public class Main {
 		//변수 선언
 		Scanner input=new Scanner(System.in);
 
+		
 		//데이터 입력 받고 토큰으로 자르기
 		System.out.println("Cheese,Pineapple,Meatball,Bulgogi,Potato중 먹고 싶은 메뉴를 선택하세요. (ex chees,bulgogi)");
 		String order=input.nextLine();

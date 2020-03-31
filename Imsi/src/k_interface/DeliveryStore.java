@@ -1,7 +1,6 @@
 package k_interface;
 
 public interface DeliveryStore {
-
 	void setOrderList(String []order_l );
 	int getTotalPrice();
 }

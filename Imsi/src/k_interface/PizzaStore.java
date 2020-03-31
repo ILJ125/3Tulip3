@@ -12,7 +12,6 @@ public class PizzaStore  implements DeliveryStore{
 		menuList[3]=new Food("Bulgogi",20000);
 		menuList[4]=new Food("Potato",16000);
 	}
-
 	public void setOrderList(String []orderList)
 	{
 		//메인에서 주문을 입력 받아 private로 설정한 orderList에 대입 
