@@ -1,0 +1,166 @@
+자바의 모토
+Write Once Run Anywhere ;한번 작성으로 모든 곳에서 실행하고 싶어
+* 유용한 클래스
+
+(1)기본적인 클래스
+	'java.lang.*;
+	'자동 import
+	'String/StrinBuffer/StringBuilder
+	'Math
+	'System
+
+(2)유틸리티 클래스
+	'java.util.*
+	'자료를 관리(Collection)
+	'List: 순서정렬 
+	'Set(중복되지 않은 데이터 관리)
+	'Map(아이디(키)와 패스워드(값) )(키값은 중복 되면 안되나 값은 중복 허용)
+		-데이터를 쌍으로 작성하는거
+
+-Math
+. Math.floor : 내림
+. Math. : 올림
+. Math.round : 반올림(반환 값 정수형)
+
+-.equlas()  
+<문제>
+class Test  {
+   public static void main ( String [] args ) {
+       String  s = new String(“true”);
+       Boolean b = new Boolean( true );
+       if( s.equals( b )) System.out.println(“equals”);
+   }
+
+}
+ Object equals= 주소 값 비교
+ String equals= String 끼리 비교
+ Boolean equals = Boolean 값 끼리 비교 
+
+-trim() : 공백 제거
+
+-StringTokenizesr st = new StringTokenizer( data, “&=”); "&="은 &와 =으로 잘라 주세요.
+ ;Tokenizer에서 기호와, 글자로 토큰을 자를 수있다.  
+
+(3)JavaGUI 
+ :화면 관리
+ -1.1 : AWT
+ //window에서만들면 window버전, Linux에서 만들면 Linux 스타일
+ -1.2 : Swing//화면이 훨씬 깔끔함
+
+Swing
+	-OS 구별 없이 모양 통일
+	-화면에 관한 클래스와 메소드가 훨씬 다양함
+	-일반적으로 클래스면 앞에 J만 붙이면 됨
+
+Layout( 배치 : Container에 붙이는 방식)
+ -FlowLayout
+  '윗줄 상단에 한줄로 배치
+  '컴포넌트의 크기가 고정
+ -GridLayout
+  '행과 열에 맞춰서 배치
+  '컴포넌트의 크기가 변경 //화면을 크게 하면 같이 커짐 
+ -BorderLayout
+  '정해진 영역에 배치
+  'CENTER, NORTH, SOUTH, WEST,EAST 영역에 배치
+  '컴포넌트의 크기가 변경
+  '한 영역에 하나의 콤포넌트 밖에 못 붙임
+화면 요소 : Component
+ -붙을 수 있는 요소 : Container (Window,Frame,panel/. . .) 
+
+(//A_Sample)
+1)Frame 만들기
+ i)has a 방식 //객체 생성해서 사용하는 방식
+  a)멤버 변수로 Frame f를 만들어주고 객체 생성한다.(생성자 함수 안에서)
+   f=new Frame("나의 창"); //객체 생성 시  창의 이름은 "나의 창"으로 지정
+  b)크기와 길이 지정 & 시각화 true
+   f.setSize(500,400);//픽셀 수치
+   f.setVisible(true);
+ ii)is a 방식 
+ a)Frame을 부모로 선언 
+   ;Frame 이 final이 붙어서 부모가 안되는것도 아니고 
+   ;abstrac이 붙어서 꼭 부모로 해줘야하고, 객체 생성이 안되는 것도 아니다.
+ b)부모로 Frame을 선언 했으니 멤버변수 선언 안해도되고 필요한 함수를 가져와서 쓰면 된다.
+ c)창크기와 시각화 true  //변수 선언 안해도 함수를 가져와서 쓸 수있다. 
+    setSize(500,400);
+    setVisible(true);	
+ d)Frame의 생성자 함수를 가져와서 객체생성=창생성 해줌
+  ;생성자 함수도 부모 함수에서 가져옴 super()
+  ;Main에서 Test라는 클래스를 만듬 그 클래스를 Frame을 상속하게함 
+  ;Test 클래스 생성자 함수로 객체 생성시 super()를 써서 부모 객체도 생성해준다.
+2)Button 만들기
+ i)has a 방식
+  a)멤버 변수 선언 하여 Button변수 만들고 객체 생성 시 버튼이름 같이 함
+   Button b; //멤버 변수 선언
+   b=new Button("확인"); //생성자 함수 안에서 객체 생성
+  b)버튼을 먼저 붙이고 화면 출력 해줍니다. 
+    f.add(b); 
+ ii)is a 방식
+  a)has a 방식이랑 똑같이 Button변수 선언 해주고 생성자 함수 안에서 Button 객체생성해줌 
+  b)그리고 붙이기 단 frame 객체가 생성된 곳에서 함수를 가지고 와서 사용 안해도 됨 상속되서 
+   add(b);
+-이미지 집어넣기 
+ : 생성자 함수 안에 버튼 객체 생성때 내용 같이 입력해주는데 거기에 , 경로 ~확장자 까지
+bAdd=new JButton("Add",new ImageIcon("src/c_infor/Imgs/001.PNG"));
+-여러가지 메소드로 가지고 놀기 
+//텍스트가 수직으로 봤을 때는 밑에
+bAdd.setVerticalTextPosition(JButton.BOTTOM);
+//텍스트가 수평에서는 중간에
+bAdd.setHorizontalTextPosition(JButton.CENTER);
+//클릭했을 때
+bAdd.setPressedIcon(new ImageIcon("src/c_infor/Imgs/002.PNG"));
+//마우스가 올라갔을 때
+bAdd.setRolloverIcon(new ImageIcon("src/c_infor/Imgs/004.PNG"));
+//말풍선
+bAdd.setToolTipText("1번 말풍선");
+//버튼 alt+i를 입력하면 이미지바뀜 버튼 누르고 있는 이미지랑 같음
+bAdd.setMnemonic('i');
+		
+
+3)Label 만들기 
+ ;클릭 안되고 글자만 출력 
+ ;버튼하고 같은 방식으로 만들면됨 
+ ;단 Layout설정 안하고 붙이기만 하면 크기가 창크기로 출력되기에 버튼 붙이고 그위에 라벨 붙이면 버튼 가려진다.
+ 
+ 4)Layout 설정 (Layout 함수)
+  -frame을 FlowLayout 형태로 지정 
+  f.setLayout(new FlowLayout());
+
+ 5)TextField 
+  ;한줄 입력 받는 거
+ -글자 입력 + 글자 수 (길이)
+  tf=new TextField("input",40); 
+
+ 6)TextArea
+  ;여러줄 입력
+
+ 7)Checkbox
+   ;체크하는 박스
+
+ 8)List 
+  ;여러목록 출력
+  -목록 추가 하는 방법
+  lst.add("hambuger"); //붙이기랑 따로
+
+ 9)Panel 
+ ;구분하기 위한 판때기
+ -패널 만들고 2행 1열로 checkbox를 만들고 구분하고 싶다.
+  p.setLayout(new GridLayout(2,1)); 패널을 2행 1열로 구분하고 싶다. //GridLayout에서만 사용 할 수있다.
+ 1)패널 객체 생성
+   JPanel p2 = new JPanel();
+ 2)패널 형태 입력
+  p2.setLayout(new GridLayout(2,1));
+ 3)패널로 나누고 싶은것을 패널 객체사용해서 선언
+  p2.add(cb1);
+  p2.add(cb2);
+ 4)p2객체를 붙이기
+   f.add(p2,BorderLayout.SOUTH);
+ 
+ -JPanel(Grid(1,6)) // 꽉참
+
+AWT => SWING으로 
+
+*f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//화면 나가기
+ 
+
+
+

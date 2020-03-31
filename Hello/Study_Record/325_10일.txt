@@ -1,0 +1,133 @@
+[수수수ㅜㅅ수요일]
+
+1.클래스 개념
+2.캡슐화
+3.클래스 + 배열
+4,생성자(constructor)
+
+5.static
+
+1.클래스
+:서로 다른 data 타입의 값들을 하나로 묶은 것
+-클래스의 구성 : 멤버변수 + 멤버메소드
+ex)
+class Sudent{
+	String name;
+	String dept;
+}
+Student s= new Sudent();
+-설명
+ Student : 클래스 명
+ s : 변수 이름 ; 클래스의 메모리를 할당 받은 객체 
+ 멤버변수 (member field) = name, dept
+
+s.name = "홍길동";
+s.dept = "컴퓨터학과"; 
+-설명
+ s라는 클래스의 메모리를 할당 받은 객체 안에 name변수에다가 "홍길동" 이라고 저장
+
+public int calTotal()		{  
+		total = kor + eng + math;  
+		return total;
+	}
+-설명
+ 멤버 함수(member method/member fuction)
+
+*용어 
+-객체 : c언어 등: object vs java : instance
+
+
+2.캡슐화(b_encaptulation class file)
+:데이터를 한번 더 보호하기위해서 캡슐을 씌움
+
+private / public
+-private 
+:외부(다른 클래스 등)에서 값을 바꿀 수 없게 선언
+ ex)private int kor;	
+-> private 멤버 변수 만든 후 main 에서 에러 확인
+에러: The field Student.kor is not visible //접근 할 수없다. 
+
+-public
+:어디서든지 접근을 허용
+:만약 public이 없으면 같은 패키지 내에서만 불러낼 수 있다.
+-> public 멤버 메소드를 만들지 않아도 에러는 발생하진 않지만 명확하게 public 지정 //메소드 앞에 public 꼭 지정해 주세요.
+-> 다른 클래스에서 private kor에 값을 바꿔주기 위해서 어디서든 접근을 허용하는 public 메소드를 만들어준다.
+-> public 메소드를 만드는데 kor이라는 멤버변수에 외부에서 가져온 값을 대입하기 위해서 setter 만들어줍니다.
+ex) public void setKor(int kor) {
+		this.kor = kor;
+	}
+*this : 인자의 변수 (지역변수 :함수내에서만 사용) 이름이 멤버 변수 이름과 같을 때 this를 붙인 변수가 멤버변수이다.
+ ex)this.kor(멤버변수)=kor(지역변수)
+->private라고 지정된 멤버변수를 다른 클래스에서 호출하여 사용하고 싶을 때 사용
+ex)public int getKor() {
+		return kor;
+	}
+*setter & getter
+-자동으로 만드세요  오른쪽 마우스 클릭 ->source -> setter getter 클릭
+setter : 외부에서 가져와야하는거
+getter: 외부로 던지는거 
+
+3.클래스 배열
+: 클래스형 데이터를 여러개 만들고 싶다.
+: 배열 안에 클래스형 데이터를 집어 넣는 다는 느낌 //나중에 그림으로 메모리 정리
+->먼저 배열을 클래스 형으로 변수선언 + 객체 생성 해줘야한다.
+ ex)Student [] s = new Student[3];
+//Student 라는 클래스형 배열 s를 만들어 줬다. 아직 배열 안에 Student 클래스 객체는 생성 안됬다.
+->s[] 배열 안에 Student형의 메모리를 가진 객체를 생성해줘야한다.
+ ex)for(int i=0;i<s.length; i++) {
+			s[i]=new Student();
+		}
+//배열의 길이 만큼 각각의 배열에 클래스형 메모리가진 객체를 생성해줘야하기에 반복문
+
+4.constructor 생성자 함수
+:객체 생성 + 초기화 동시에 
+:클래스작성 파일에서 생성자 함수를작성한다. 그럼 main에서 클래스 이름만 불러서 바로 객체 생성 가능하다.
+-클래스가 인스턴스화 될 때 (객체로 될 때) 실행되는 함수//new를 만날 때만
+ ex) Student s=new Student(); // new는 꼭 붙여줘야한다.
+-클래스이름과 동일해야만 함
+-리턴 형이 없음 ( void 도 있음 안됨 )
+-오버로딩 가능 (overloading) //인자의 갯수나, 인자의 데이터형이 다르면 다른 함수로 취급
+		:	 매개변수의 타입과 개수가 다르게 여러 개 생성자 함수 가능
+ex)public Student() {
+		name = "홍길동";
+		kor = 50;
+		eng = 50;
+		math = 50;
+	}
+*this 와 this()
+this : 자기 객체를 지칭하는 예약어로 멤버변수나 멤버메소드를 명확하게 지칭할 때 사용
+this() : 다른 생성자 함수 호출시, 다른 생성자 함수 안에서만 쓸 수있다.
+ [ 주의 ] 제일 첫 라인에 기술되어야 한다
+
+5.static
+:메소드 명에 static 붙이면 => class명으로 class에 접근할 수 있다. 
+:무언가(변수값 같은거)를 단 하나로 공유 하고 싶어요.
+-static을 붙이는 순간 static영역에 따로 저장이 됩니다. 이름을 공유 합니다. 
+ ex)	Book b1 = new Book();
+	Book b2 = new Book();
+	Book b3 = new Book();
+//Book() 생성자 함수가 생성되면서 count++ 함 3번 호출 하면 count 값은 3 
+//Static으로 공유 했기에 가능 
+-메모리에 먼저 잡아놓고 시작 합니다.
+-객체 명이 아닌 클래스명이 접근이 가능(즉 객체 생성 안해도 접근이 가능 하다는 사실)
+ ex)System.out.println("총갯수: " + Book.count); //Book 클래스에 있는 count를 호출 할 수 있음. 
+-----------------------------------------------------------------------------
+*에러 
+-This method must return a result of type int ;return int 형 한다 해놓고 return이 없어
+-java.util.InputMismatchException 입력 에러
+
+*main 클래스가 있는 자바 파일 안에 또다른 클래스를 만드면 임시 파일로 저장됨 
+ 이 때 자바 파일은 하나지만 클래스 파일은 2개가 된다.(가급적 하지마세요 찾을 수가없어요)
+
+
+*return으로 클래스를 return하면 return타입은 클래스명이 된다.
+
+*클래스와 배열은 기본으로 null 자동 초기화
+
+*배열에 배열을 대입할 때 
+ 먼저 배열 선언 
+ int [] bayeol ; 
+ 배열에 배열 값을 대입(bayeol <-su배열 전체 대입)
+ bayeol=su;
+
+*

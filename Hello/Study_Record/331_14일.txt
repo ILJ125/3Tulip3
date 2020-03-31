@@ -1,0 +1,120 @@
+화나는 화요일?
+
+1.Swing으로 GUI구성 
+ -반드시 앞에 J를 붙였는지 확인하자 패널에도 꼭 JPanel로 확인합시다.
+
+2.화면 + 동작 (이벤트)
+ 
+
+----------------------------------------------
+2. 이벤트 TestA에서 부가 설명 작성
+//계속 반복문을 돌면서 사용자가 이벤트를 발생시켰는지 확인
+while(true){
+   사용자의 이벤트를 받음
+   switch(이벤트){
+      case MouseeEvent : A(); break;
+      case KeyEvent : B(); break;
+      //예를 들어 내가 A를 눌러서 다운로드를 받으면서 다른 작업을 하고 싶다.
+    }
+}
+//위에 반복문을 돌려 이벤트가 발생할 때 계속 확인하는 것을 Window가 해주고 있음
+//자바는 JVM이 해주고 있음 
+//우리는 JVM부터 생각 해주면 된다.
+//OS(운영체제) ______________> JVM 이벤트를 메세지 방법으로 JVM에게 알려줌
+//이벤트 발생했을 때 실행되는 코딩을 JVM이 실행시킴
+//단 JVM이 인지하는 이름으로 우리는 알려줘야 한다.
+//그래서 우리는  action메소드를 가지고 있는 인터페이스를 만들어주고
+//우리가 이벤트 발생시 실행하고 싶은 코딩이 든 클래스에 인터페이스를 구현하고
+// 오버라이딩으로 우리 클래스에 action()메소드를 완전구현시켜준다.
+
+[이벤트 절차]
+1.이벤트 핸들러 ( 이벤트를 구현한 클래스) //이벤트 연결만 하고 기다리다고 사용자가 이벤트 발생시키면 부름 
+  (1)Listener(인터페이스)구현//을 위해 클래스(MyEvent)를 하나 만든다.
+	class MyEvent implements ActionListener{ }
+  (2)이벤트 메소드를 overrideing 
+	class MyEvent implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+	}
+}
+2. 1.내가 만든 이벤트 핸들러를 객체 생성 (핸들러 사용하기 위해)
+ ex)MyEvent ehandler=new MyEvent();
+3. 이벤트 발생할 컴포넌트와 2번 객체(핸드러 사용 위해 만든 객체)와 연결
+ ex) b.addActionListener(ehandler);
+
+**ActionEvent
+1)버튼 클릭
+2)메뉴 클릭
+3)텍스트 필드 엔터 쳤을 때
+4)리스트에서 더블 클릭
+5)체크박스/라디오버튼 등 클릭
+... 등 등 등 
+
+**WindowEvent 
+-WindowEvent의 이벤트 헨들러  는 WindowListener()
+-Window 이벤트 헨들러인 WindowListener 인터페이스가 가진 7가지 함수 전부를 구현 해줘야한다.
+-windowClosing : 
+//윈도우에 x 버튼 눌렀을 때의 이벤트처리
+ ex) public void windowClosing(WindowEvent e) //함수여서 
+-Window 이벤트 발생할 컴포넌트와 윈도우 헨들러 연결 
+ :addWindowListener
+//윈도우 이벤트 여서 addWindow, 마우스는 addMouse ,키보드는 addKeyboard
+
+-자바는 Acton 밖에 안써 그래서 ActionListner를 implements 해주자 ( TestB 이클립스)
+//구현해준 클래스 자체가 이벤트 핸들러가 되겠다!(객체 생성 아님)
+
+[축약]
+1)
+//이벤트 핸들러 객체 생성
+MyEvent ehandler=new MyEvent();
+//이벤트 연결
+b.addActionListener(ehandler);
+---->축약
+객체 생성 & 연결 같이
+b.addActionListener(new MyEvent();
+
+2) 
+이벤트 핸들러 + 이벤트 핸들러 객체 생성 + 이벤트 연결
+b.addActionListener(new ActionListener()
+{
+	public void actionPerformed(ActionEvent e) {
+		Object evt =e.getSource(); //이벤트 발생한 객체 가져옴,Object로 받는다 왜냐하면 textfiled일 수도 있고 버튼 일수도 있으니
+			String msg=b.getText();
+			JOptionPane.showMessageDialog(null, msg+"이벤트발생b");	
+	}
+});
+}
+//ActionListener() 뒤에 {  임의의 클래스   }를 구현하면서 ActionListener() 인터페이스를 구현하고, new를 붙음으로서 객체 생성을 시킵니다. 
+*Object evt =e.getSource(); //이벤트 발생한 객체 가져옴,Object로 받는다 왜냐하면 textfiled일 수도 있고 버튼 일수도 있으니
+ => 전부 버튼이거나 전부 같은 component 일 때 
+  JButton evt=(JButton)e.getSource();
+*String msg=b.getText(); // button에 적힌 글자 가져옴
+
+*JOptionPane.showMessageDialog(null, msg+"이벤트발생b"); //메세지 출력
+
+*System.exit(0); // 나가기 버튼 누르면 프로그램 종료 되기 위해서
+
+*DO_NOTHING_ON_CLOSE ;아무 것도 안하겠습니다.
+
+*JOptionPane.showConfirmDialog(null, "진짜로 나갈거야?"); 
+//예, 아니오, 취소를 누를 수있다.
+예 : JOptionPane.OK_OPTION
+아니오 : JOptionPane.NO_OPTION
+취소 : JOptionPane.CANCEL_OPTION
+
+*메소드가 여려개 구현 해줘야 할 때
+`- Listener 대신 Adapter를 입력하면 인터페이스안에 모든 함수들을 다 구현 해줄 필요가 없다.
+ : 내 실수를 못잡아줘서 오류가 발생안함
+
+*TextField2.setText(TextField1.getText); 
+
+3. Stack 
+: 시작 할때 주소하나 저장하고, 마지막에 주소를 저장한다.
+: 지바에 Stack 클래스 있음
+
+4. 큐 (버퍼)
+: 먼저 들어간게 먼저 나옴                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  : 큐는 인터페이스 여서 implement 해줘야함                 
+
+
+==============================================
+*Thread.sleep(1000); 1000=1초, 1초 후에 함수 실행 
+ //예외처리 해주세요 가 뜬다.

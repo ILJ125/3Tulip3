@@ -1,0 +1,98 @@
+[3월 24일 화요일]
+
+1.함수 복습 method
+	-main 인자 (string[]args)
+	-오버로딩 개념
+2.예외(exception) 처리
+	-교재 14장
+	-try catch 구문
+
+-----------------------------------------------------
+3,클래스 개념 (욕심)
+
+==========================================================
+1. main 인자 (string[]args)에 [서버ip][서버 계정][서버 비밀번호]저장하고 실행할 때 바로 가져오기
+사용하는 이유: 따로 코딩 내용에 [서버ip][서버 계정][서버 비밀번호]를 작성하지 않고
+	      실행할 때 바로 서버정보를 가져와서 접속하기 위해서
+[서버ip][서버 계정][서버 비밀번호]: 보안 상으로 Id,pw 느낌으로 접속할 때마다 필요하고 계속바뀐다.
+* 직접 운영체제에서 자바 실행할 때
+ (1) 자바 컴파일 : 자바 파일(사람이 보는파일)->class(컴퓨터가 보는 파일)
+ 		javac Hello.java (Hello.java-> Hello.class)
+ (2) 자바 실행 (Hello.class)
+ 		java Hello(확장자를 뺀 클래스파일명을 기술한다.)
+ * 문자열을 입력한 java바로 실행
+ (1)String[] args에 [서버ip][서버 계정][서버 비밀번호]를 저장 해놓고 class 실행할 때 가져오기
+ :Run->Run configulations ->Arguments ->program Arguments에 "127.0.01 kosmo 1234"입력
+ :args[0] = 127.0.01 ,args[1] =kosmo,args[2]=1234 저장 
+ (2)cmd로 자바 파일 실행 할 때 [서버ip][서버 계정][서버 비밀번호]를 입력하여 실행하는 방법 
+ :컴퓨터가 읽는 자바 파일이 있는 위치로 cmd 위치를 바꿔 준다.
+  ex)cd C:\Users\Canon\git\ilj125.github.com\JavaBasic\bin
+ :java 패키지명.java파일 명 (확장자 빼고)  [서버ip][서버 계정][서버 비밀번호]
+ :java e_method.Ex06_main_inja2 127.0.0.2 admin 1234  
+
+ex)cmd 창
+C:\Users\Canon\git\ilj125.github.com\JavaBasic\bin>java e_method.Ex06_main_inja2 127.0.0.2 admin 1234
+127.0.0.2
+admin
+1234
+서버접속
+
+2.Overloading
+오버로딩( overloading )
+  - 인자의 자료형과 갯수가 다른 동일한 함수들(함수명 동일)
+  ex) println() ,println(boolean x),println(int x) ... 등
+  ;오버로딩 개념 없으면 데이터 형 마다 다른 print이름을 줘야했음
+  -return형만 다른 함수는 오버로딩이 아닙니다.
+
+3.Exception 예외 처리 (p480)	
+오류
+  	-에러 : 심각한 오류(컴파일 오류)
+ 	-예외 : 심각하지 않은 오류
+ 	 =>예외처리
+ 	 :프로그램 정상으로 돌리기 위해서
+   (1)try ~ catch
+   	try{
+  		예외가 발생할 구문
+  	}catch (Exception ex){
+  			예외가 발생한 후의 구문
+  		}finally{
+  			예외관계없이 무조건 실행 구문
+  		}
+   (2) 메소드 뒤에 throws 
+	void method () throws MyException {throw new MyException(); }
+-throw new Exception(); //Exception 이라는 예외 발생함
+-throws Exception; //예외를 main으로 던지세요.
+
+ 
+*여기서 return으로 반환 처리를 해줘도 finally는 무조건 처리 구문이라서 무조건 처리한다.
+
+*try 구문에서 예외가 발생하는 순간 그 발생한 지점에서 바로 catch구문으로 간다. 
+-catch구문으로 간 후 finally구문으로 갔다가 바로 끝남
+
+*FIleInputStream
+  java 파일 외 파일에서 정보 가져오고 싶을 때 사용하느 가상 토로
+  FileInputStream fis = new FileInputStream("data.txt");
+  try catch가 없으면 오류가난다.
+  오류해결에서 surround try catch를누르면 try구문생성
+-fis.read(); //통로랑 연결된 파일에서 읽어옴
+-fis.close(); //통로를 꼭 닫아줘야한다.
+
+*모든 예외 처리 catch(Exception e){                  }
+
+*예외 내용 구체적
+-FileNotFoundException : 파일 존재 안하고 있음
+-IOException : 입출력 예외
+
+*JVM의 main은 void main이어야 한다 꼬옥! (c는 다르다)
+
+*void = return 형이 없습니다.
+
+*네트워크, 서버 등 사용할려고 열고나서 반드시 닫아 줘야 합니다.
+
+*System.exit(0); //프로그램을 종료시킴
+
+*배열 : 동일한 자료형을 하나의 변수명으로 관리
+
+*ex.toString : 무슨 예외 구문이 뭔지 알려준다.
+4. 클래스(Imsi -> a_basic ->student)
+:서로다른 자료형들 + 함수들

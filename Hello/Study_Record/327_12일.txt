@@ -1,0 +1,162 @@
+[오늘은 행복한 불금이지만 불금하지 마세요 ; 네에~칼퇴~할게요옹]
+
+1.abstract : 미완성
+
+2.final
+
+3.interface
+
+
+숫제
+1. 연습1,2
+2. 9장 까지 
+
+------------------------------------------------------------------------------------------------------------
+1.abstract(abstract패키지에 test )
+ : 미완성
+ : 추상 메소드는 반드시 오버라이딩으로 완성을 해줘야합니다.
+ : 강제로 오버라이딩 해주기 위해서 추상메소드를 사용함(overiding 강제성 부여)
+ : 추상 클래스는 객체 생성이 안된다. 즉 부모 클래스의 역활만 할 수 있다.
+ -메소드 앞 : 선언만 있는 메소드 (구현이 없음)
+ public void output() {} : 블럭이 있다는 건 아무것도 안하는 구현이 있는거다.
+ -클래스 앞 : 추상메소드를 가지고 있는 클래스
+ex) 
+public abstract class Item {
+
+	public abstract void output();//미완성 메소드
+}
+ -엄마 클래스가  미완성 일 때 오버라이딩 안됬으면 뜨는 에러
+  The type Cd must implement the inherited abstract method Item.output()
+
+2.final
+ :변경 불가 
+-field : 값 변경 불가, 즉 상수 만들 때
+-method : overriding 안됨 
+-class : 부모 클래스가 못됨(is a 방식 안됨)
+        : has-a 방식으로만 가능
+
+3.interface
+:추상 메소드만 있음
+ - 함수를 만들 때  무조건 추상 메소드가 되어야 한다. 그래서 함수는 {}이 없어야 한다.
+ - 클래스도 추상 클래스가 된다. 
+:객체 생성 안됨
+ - interface 안에 변수에 접근 하고 싶으면 static을 만들어줌 
+:부모가 interface인 경우는 implements(구현) 을 쓴다. (그냥 클래스는 상속할 때 extends)
+-다중 상속 가능 해요
+:점선화살표는 interface 관계이다. 
+비교)
+class A{
+    int A;
+    A(){}
+    voidA(){}
+ }
+interface B {
+    [public static final]int B;
+    [public abstract] void B();
+  }
+
+-----------------------------------------------------------------------------------------------------------
+*modifier
+_1__class A{
+	_2__int A;
+	_3__A(){};
+	_4__void A(){};
+
+1. 클래스 앞 :default,public,abstract,final(private, protected 앞에는 못붙인다.)
+2. 변수 앞 :private,default,protected,public,static,final
+3. 생성자 함수 앞 :private,default,protected,public
+4. 함수 앞 :private,default,protected,public,abstract,final(overiding 안쓸래),static(클래스 명으로 접근하고 싶어)
+
+
+*String ,int, double 등 을 반환해야하는 데  배열로 만들어서 반환 하자
+-기본형을 참조형 데이터로 만들어서 배열로 만들어 주자
+-기본형(int,double) => 참조형 (Integer, Double)
+과정
+-클래스의 부모 클래스는 기본적으로 Object이다.
+-Object 안에 String ,Integer,Double이 다 있다. 그래서 이 3개를 하나의 배열에담으려고 하니 Object형태의 
+-int 를 Integer 형태로  객체 생성 ,double를 Double클래스 객체생성 후 데이터 담음 
+ ex)
+Object [] data = new Object[3];
+data[0]=name;
+data[1]=new Integer(age); // int -> Integer
+data[2]=new Double(height); //double -> Double
+
+*자료형 관련 클래스
+ Byte / Short
+ Character
+ Integer / Long
+ Float / Double
+
+*형변환 관련 하여
+String -> int 형
+Integer.parseInt()
+
+int형 -> String
+String.valueOf(10) -> "10"
+
+*println에서 자동으로 toString이 불러진다.
+ ex)System.out.println(data)
+*동적 배역 ArrayList
+:크기를 알아서 잡아주면 안될까?
+:근데 여러가지 데이터 타입 섞어서 사용 가능
+:ArrayList는 Object 형으로 리턴 함
+:만약 우리가 String 형이 필요하면 형변환 우리가 해서 알아서 사용해라
+ ex)ArrayList<String>  list = new ArrayList<String>(4);
+ArrayList data = new ArrayList();
+data.add(name);
+data.add(age);
+data.add(height);
+
+-ArrayList data ; // ArrayList 데이터 형의 data
+-data.add("rabbit") //data 추가
+-data.size()// ArrayList 데이터 크기
+-data.get(i)//i번째 ArrayList 데이터 가져옴
+
+*generics 선언 
+:for문의 향상형을 쓰기 위해서 자료형을 명시적으로 전부 적어 주는거 <String> 이렇게
+-for문의 향상 형
+ -선행 조건 
+ :반복 시킬 배열,ArrayList의 데이터 형이 전부다 일치 해야 한다.
+ex)ArrayList<Student> list=method(); //main에서 method()함수 리턴 ArrayList형 데이터를 반환받는다.
+   ArrayList<Student> list=new ArrayList<Student> //ArrayList 객체 생성할 때도 Student 형태로하겠습니다.
+   static ArrayList<Student> method() //함수 이름 중 반환 형도 Student 데이터 형으로 반환 하겠습니다.
+-사용 법
+for(Student data : list) //list정보를 Student 형 변수 data에 저장  
+		{	System.out.println(data.toString());///toString()이 생략 되있다.
+		}
+//list가 Object 형이든 Student 형이든 overiding 되서 자동으로 자식의 toString()이 불려진다.
+
+*HashSet
+:Set이 중요 중복되지 않는다.
+:Interface 여서 add,size 등등 공통적인거 쓰면 된다. 
+: 중복이 있으면 중복된 숫자를 빼준다.
+: 만약 반복문 돌리면 i번 만큼 돌린다 하지말 고 lottos.size가 6이 될때 까지 반복 해서 숫자 집어넣어주세요 하면 된다.
+-출력은 HashSet lottos = new HashSet(); 이면 lottos만 적어 주면 된다.
+
+*TreeSet();
+//Tree구조라서 중복 없이 바로 정렬되서 나옴
+//Tree구조는 작으면 오른쪽 끄면 왼쪽으로 정렬
+
+
+================================================================
+*부모 클래스 안에 함수를 다형성 쓰고 싶을 때  오버라이딩 한 함수안에 무엇이든 내용은 들어가야한다.
+
+*부모 클래스의 생성자 함수는 기본값이 나오는 생성자 함수를 하나 만들어 줘야한다.
+
+*우리가 만든 모든 클래스를 포함해서 자바의 모든 클래스의 부모 클래스는  Object가 있다
+-extends를 굳이 기술 안해도 extends Object가 자동 기술 되있는 거다.
+
+*String Buffer
+-sp.reverse();			// 문자열을 역순으로 나열
+-sp.replace ( 0, 5, "Hello");	// 0번째 부터 5번째 전의 문자열을 "Hello"로 변경
+-sp.setCharAt(  5 , '~');		// 5번째 문자를 '~'로 변경
+-sp.insert ( 6, "Java");		// 6번째에 "Java" 문자열을 삽입
+-sp.delete(10,15);			// 10번째부터 15번째 전의 문자열을 제거
+-sp.append("ssem!!");				// 문자열 뒤에 "ssem!!" 추가
+
+*int는 데이터 형이고 Integer는 클래스
+
+
+*map.containsKey(id) //이거머냐아아ㅏㅇ아아아아아아 bHashSetLottoEx
+
+*Collections.sort(list);//이거머냐 ??????????? bMap________
