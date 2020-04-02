@@ -24,7 +24,7 @@ public class Mainmenu extends JPanel{
 			 j++;
 		}
 		
-		JButton a = new JButton("",new ImageIcon("src/pc_plus/Imgs/캡처"+i[0]+".PNG"));
+		JButton a = new JButton("a",new ImageIcon("src/pc_plus/Imgs/캡처"+i[0]+".PNG"));
 		JButton b = new JButton("b",new ImageIcon("src/pc_plus/Imgs/캡처"+i[1]+".PNG"));
 		JButton c = new JButton("c",new ImageIcon("src/pc_plus/Imgs/캡처"+i[2]+".PNG"));
 		JButton d = new JButton("d",new ImageIcon("src/pc_plus/Imgs/캡처"+i[3]+".PNG"));
