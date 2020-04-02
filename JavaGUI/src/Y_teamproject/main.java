@@ -18,7 +18,7 @@ import javax.swing.JTabbedPane;
 
 public class main extends JFrame {
 	//멤버변수 선언
-	  int sum =0;
+	int sum =0;
 	JButton [] menu = new JButton[12];
 	JButton  total, cancel, order;
 	JLabel won;
@@ -34,7 +34,7 @@ public class main extends JFrame {
 	ArrayList <JButton> list = new ArrayList<JButton>();
 	main(){
 		super("pc방");
-//		ma = new Mainmenu();
+		//		ma = new Mainmenu();
 		for(int i=0; i<menu.length; i++) {
 			menu[i] = new JButton(new ImageIcon("src/pc_plus/Imgs/캡처"+i+".jpg"));
 		}
@@ -79,11 +79,11 @@ public class main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	  //주문 메뉴 총 가격 보여주기
-	   void totalPrice(int k) {
-	      sum +=pr[k];
-	      won.setText(String.valueOf(sum)+"원");
-	   }
+	//주문 메뉴 총 가격 보여주기
+	void totalPrice(int k) {
+		sum +=pr[k];
+		won.setText(String.valueOf(sum)+"원");
+	}
 	public void eventProc()
 	{
 		//(1) 이벤트 핸들러 
@@ -94,19 +94,31 @@ public class main extends JFrame {
 			{
 				public void actionPerformed(ActionEvent e) {
 					JButton evt =(JButton)e.getSource(); 
-				for(int j=0;j<menu.length;j++) {
-					if(evt==menu[j]) {
-						System.out.println(me[j]);
-						
-						vec.add(me[j]);
-						ls.setListData(vec);
-						totalPrice(j);
+					for(int j=0;j<menu.length;j++) {
+						if(evt==menu[j]) {
+							vec.add(me[j]);
+							ls.setListData(vec);
+							totalPrice(j);
+						}
 					}
-				}
 				}
 			});
 		}
+		cancel.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				JButton evt =(JButton)e.getSource(); 
+				vec.clear();
+				ls.setListData(vec);
+				System.out.println("전체취소");
+				sum=0;
+				won.setText(String.valueOf(0)+"원");
+			}
+		});
+
+
 	}
+
 
 	public static void main(String[] args) {
 		main a = new main();
