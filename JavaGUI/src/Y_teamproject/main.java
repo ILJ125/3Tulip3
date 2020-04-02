@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 
 public class main extends JFrame {
 	//멤버변수 선언
+	  int sum =0;
 	JButton [] menu = new JButton[12];
 	JButton  total, cancel, order;
 	JLabel won;
@@ -79,11 +80,8 @@ public class main extends JFrame {
 
 	}
 	  //주문 메뉴 총 가격 보여주기
-	   void totalPrice() {
-	      int sum =0;
-	      for(JButton jb : list) {
-	         sum += price.get(jb);
-	      }
+	   void totalPrice(int k) {
+	      sum +=pr[k];
 	      won.setText(String.valueOf(sum)+"원");
 	   }
 	public void eventProc()
@@ -102,7 +100,7 @@ public class main extends JFrame {
 						
 						vec.add(me[j]);
 						ls.setListData(vec);
-						totalPrice();
+						totalPrice(j);
 					}
 				}
 				}
