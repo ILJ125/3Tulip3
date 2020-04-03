@@ -11,6 +11,7 @@ public  class Server extends Thread {
 	public Server() {
 		try{
 			listen = new ServerSocket( PORT );
+			System.out.println("서버 접속");
 		} catch( IOException ex ) {
 			System.out.println("Creating the ServerSocket.." + ex );	
 		}	
@@ -22,7 +23,7 @@ public  class Server extends Thread {
 		try{
 			while( true){
 					Socket client = listen.accept();
-					JuryThread cc = new JuryThread( client );	
+					JuryThread cc = new JuryThread( client );	//3명이 접속하면 3명이됨
 					System.out.println("클라이언트 입장 : " + client );
 			}
 		} catch( IOException ex ) {
@@ -78,7 +79,7 @@ class JuryThread extends Thread{
 		*/
 		int result[] = new int [10];
 		for( int i=0 ; i<result.length ; i++ )
-			result[i] = a[i] + b[i];
+			result[i] = a[i] + b[i] ;
 		
 		/*******************************************
 		* 계산 결과를 다시 클라이언트로 보냄

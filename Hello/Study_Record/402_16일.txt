@@ -1,0 +1,173 @@
+[모모모몸ㄱ요일]
+
+IO
+
+1.bytestream
+:Byte 형으로 입력(외부->컴퓨터), 출력(컴퓨터->외부)
+<기본>
+OutPut : 내가 프로그램으로 입력한거를 다른 외부 파일(ex txt)로 보내기 Stream(통로)
+InPut : 외부파일에서 프로그램으로 읽어 오기 Stream(통로)(단 내가 프로그램으로 입력한거를 읽어 올 수 있다.)
+write : 통로를 통해서 외부 파일에 출력
+read : 통로를 통해서 외부파일로 부터 데이터를 받아 컴퓨터에 입력
+<OutPut>
+-통로를 만든다.
+ (단 통로를 만들고  사용하고 바로 닫아 줘야한다.)
+ ex)
+ FileOutputStream fos = new FileOutputStream("a.txt");
+ fos.close();
+//write(outputstream)할 때는 a.txt 파일이 없으면 알아서 만들어 준다.
+-fos(통로이름).write(ch) ; //output은 바이트 형이어서 char형을 Byte 형으로 쪼갠다.
+
+
+
+
+for( int ch = 0; ch <=26; ch++)
+{
+	System.out.print((char)come.read());
+}
+// read는 int형을 반환하기에 char 형으로 읽어 오고 싶어서 형변환
+
+
+
+-***필터링 : int형도 받고 Byte형도 받고 다 받고 싶어서 클래스도 받을 수 있음
+ :통로앞에 필터를 붙여넣고 필터를 통해서 통로를 통과 시킴
+DataOutputStream dos=new DataOutputStream(fos);
+
+
+
+-ObjectStream: 하나의 묶음(클래스)으로 묶어서 보내기 위해서
+ (주의) 객체 덩어리가 커서 스트림을 통과하지 못한다. 그래서 직렬화가 필요하다.
+-직렬화 : 객체가 스트림을 통과하기 위해서 
+ 방법)인터페이스 Serializable 구현
+  implements Serializable
+ -이 인터페이스는 추상메소드가 없음
+
+<에러 확인>
+*오류 문구 출력
+ex.printStackTrace();
+
+-java.io.NotSerializableException:
+ ;덩어리가 커서 안들어감 그래서 직렬화가 필요함
+
+
+<파일 저장, 읽어오기>io.ReaderWriterTest.java
+-파일 저장 or 파일  불러오기 할 때 사용하는 JFileChooser()클래스 사용
+//파일저장,열기 할때 파일 선택하는 창을 불러온느것=JFileChooser()
+//JFileChooser()를 fd라는 곳에 객체 생성
+JFileChooser fd = new JFileChooser();
+
+//파일 열기 창을 불러옴 showOpenDialog;
+//파일 저장창을 불러옴 showSaveDialog;
+//showOpenDialog, showSaveDialog는 저장하든 열든 그 결과 값을 int형으로 반환
+int returnValue = fd.showSaveDialog( null );
+
+//만약 returnValue에 값이 JFileChooser 중 APROVE_OPTION이면 {}실행
+//Cancel_OPTION도 있다.
+if( returnValue == JFileChooser.APPROVE_OPTION )
+   {
+	}
+
+<JSON>
+-자바의 파일 입출력(IO)
+*xml방식
+<personn>
+	<name>홍길동</name>
+	<age>40</age>
+	<tel>055-555-5555</tel>
+</person>
+*json방식
+{
+  person :{
+	name:홍길동,
+	age : 40,
+	tel : 055-555-5555,
+	}
+}
+<Json 형태로 화면에 입력된 값 저장>io.json\GuiTest
+<파일 write>
+1.JSONObject 객체 생성
+JSONObject obj = new JSONObject();
+2.JSONObject에  hash값으로 저장 해야한다. key 값과 value 
+ -hash는 put으로 데이터 입력이 된다.
+obj.put("name",tfName.getText());
+obj.put("tel",tfTel.getText());
+obj.put("Id_number",tfJumin.getText());
+obj.put("sex",tfGender.getText());
+obj.put("age",tfAge.getText());
+obj.put("home",tfHome.getText());
+3. 문자형으로 데이터를 받아서 외부파일에 저장할거라서 writer reader을 사용
+FileWriter fw = new FileWriter("src\\io\\json\\test.json");
+4. 외부파일 저장시 나는 JSON 타입으로 저장하고 싶다. 
+-toJSONString : 문자형 -> JSON형태 문자로 저장
+fw.write(obj.toJSONString());
+5.통로 닫아 주기
+fw.close(); 
+
+<파일 reader>
+1.FileReader를 사용해서 json파일을 FileReader통로에 입력하여 파일 읽어 오기
+FileReader fr = new FileReader("src\\io\\json\\test.json");
+2.일단 외부 파일은 Json형태로 문자열로 저장되어있는 것이다. 그래서 의미있는 것들(키)별로 잘라야한다.
+ //parser의 반환값은 return형이다.
+JSONParser parser = new JSONParser();
+3.우리는 키별로 잘라서  parser에 저장했으니 JSON형태로 받아서  키값에 따른 value 값을 프로그램에입력을 해준다
+ .JSONObject obj=(JSONObject)parser.parse(fr);
+ tfName.setText( (String)obj.get("name"));
+ tfTel.setText( (String)obj.get("tel"));
+ tfJumin.setText( (String)obj.get("Id_number"));
+ tfGender.setText( (String)obj.get("sex"));
+ tfAge.setText( (String)obj.get("age"));
+ tfHome.setText( (String)obj.get("home"));
+
+*JScrollPane 스크롤 가능하게하는거
+new JScrollPane(ta) 
+
+<THread 맛보기>
+*멀티 프로그래밍 (멀티 태스크)비슷 (멀티 쓰레드)
+:두개 쓰레드를 동시 진행,멀티프로그래밍 효과를 볼 수 있다.
+1.Thread  상속 또는 Runnable 구현
+2.run() 메소드 오버라이디
+3.run() 호출 ; start() ->알아서 run()  호출됨
+
+(1)Thread 상속 사용시
+ Thread 안에 start가 있어서 오버라이딩한 run() 호출 대신 start() 바로 호출 해주면 된다.
+
+(2)Runnable 구현 RunnableTest
+
+=>클래스 만들어서 거기에 오버라이딩으로 run함수 구현하고 
+=>메인에서 클래스 객체 생성하고 Thread형태 객체에 Runnable 구현한 클래스 객체 저장하고
+=>Thread형 객체에도 run함수가 있고 내가만든 Runnable 구현한 클래스에도 run이 있어서 오버라이딩 됨
+=>run 함수 대신 start로 불러오면됨
+
+(3)Thread 메소드
+ Run 함수를 오버라이딩으로 구현하여 start();를 입력하면  thread가 실행구현된다.
+-Thread.sleep(1000); 1초마다 쉬래
+//try catch구문 만들어 줘야 한다.
+-Thread.join() : 너가 다아 작동할 때까지 기다려 줄게
+(4)Countdown하는 스레드
+1.Thread 객체 안에 Runnable (멀티)객체 생성
+2.run()함수 오버라이딩
+3.카운트 다운을 라벨에 10~0까지 세고 싶어
+4.중간에 쉬지(sleep)안하면 그냥 바로 0됨
+ new Thread(new Runnable() {
+               public void run() //런함수 overriding
+               {
+                	for(int i=10;i>0;i--) {
+               		lb.setText(String.valueOf(i));//카운트를 반복문으로 설정하고 라벨에 붙임
+               		try {
+						Thread.sleep(1000);//1초마다 쉴래
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+               	}
+               }
+          	
+            }).start();
+(5)업그레이드  0되기전에 암호 입력
+
+
+
+????JuryThread 가머하는거라고?
+==============================
+*해쉬맵에 넣을 때는 put
+
+*화면 창 다시 그리기 Frame명.repaint();
