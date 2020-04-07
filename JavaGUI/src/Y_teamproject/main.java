@@ -125,13 +125,18 @@ public class main extends JFrame {
 	}
 	//주문 메뉴 총 가격 보여주기
 
-	void totalPrice(int k) {
-		sum +=pr[k];
+	void totalPrice(String k) {
+		if(price.containsKey(k)) {
+			sum +=price.get(k);
+			won.setText(String.valueOf(sum)+"원");
+		}
+	}
+	void deletePrice(String k2) {
+		sum = sum-price.get(k2); 
 		won.setText(String.valueOf(sum)+"원");
 	}
-	void deletePrice(String k) {
-		sum = sum-(price.get(k)); 
-		won.setText(String.valueOf(sum)+"원");
+	void pcbangevt() {
+
 	}
 	public void eventProc()
 	{
@@ -147,13 +152,14 @@ public class main extends JFrame {
 						if(evt==menu[j]) {
 							vec.add(me[j]);
 							ls.setListData(vec);
-							totalPrice(j);
+							System.out.println((String)ls.getSelectedValue());
+							totalPrice(String.valueOf(ls.getSelectedValue()));
 						}
 					}
 				}
 			});
 		}
-		//랜덤 추천 메뉴 클릭시 이벤트
+		//랜덤 추천 메뉴 클릭시 
 		for(int raw=0;raw<hot.length;raw++) {
 			hot[raw].addActionListener(new ActionListener()
 			{
@@ -163,7 +169,7 @@ public class main extends JFrame {
 						if(evt==hot[j]) {
 							vec.add(me[ran[j]]);
 							ls.setListData(vec);
-							totalPrice(ran[j]);
+							//							totalPrice((String)ls.getSelectedValue());
 						}
 					}
 				}

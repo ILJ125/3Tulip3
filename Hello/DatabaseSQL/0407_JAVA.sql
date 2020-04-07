@@ -1,0 +1,73 @@
+CREATE TABLE reg_tab( text varchar2(20) );
+
+INSERT INTO reg_tab VALUES('TIGER');
+INSERT INTO reg_tab VALUES('TIGGER');
+INSERT INTO reg_tab VALUES('elephant');
+INSERT INTO reg_tab VALUES('tiger');
+INSERT INTO reg_tab VALUES('tiger2');
+INSERT INTO reg_tab VALUES('tiger3');
+INSERT INTO reg_tab VALUES('doggy');
+INSERT INTO reg_tab VALUES('5doggy');
+INSERT INTO reg_tab VALUES('DOG');
+INSERT INTO reg_tab VALUES('DOG2');
+INSERT INTO reg_tab VALUES('°³');
+INSERT INTO reg_tab VALUES('cat');
+INSERT INTO reg_tab VALUES('catty');
+INSERT INTO reg_tab VALUES('9catty');
+INSERT INTO reg_tab VALUES('catwoman');
+INSERT INTO reg_tab VALUES('°í¾çÀÌ');
+INSERT INTO reg_tab VALUES('BAT');
+INSERT INTO reg_tab VALUES('BATMAN');
+INSERT INTO reg_tab VALUES('BATGIRL');
+INSERT INTO reg_tab VALUES('0BATGIRL');
+INSERT INTO reg_tab VALUES('¹ÚÁã');
+
+SELECT *
+FROM reg_tab;
+
+-- 1.  text ÄÃ·³ÀÇ ¹®ÀÚ¿­¿¡¼­ 't'·Î½ÃÀÛÇÏ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE text like 't%';
+
+-- 2. text ÄÃ·³ÀÇ ¹®ÀÚ¿­¿¡¼­ 't'·Î ³¡³ª´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE text like '%t';
+-- 3. Ã¹¹øÂ° 't'·Î½ÃÀÛÇÏ¿© 5¹øÂ° 'r'ÀÌ ÀÖ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE text like 't___r%';
+--Á¤±Ô½Ä Ç¥Çö Ä¸Ã³·Î ÀúÀå
+-- 4. ¼ýÀÚ·Î ³¡³ª´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE regexp_like(text,'[0-9]$');
+ 
+
+-- 5. ¼ýÀÚ·Î ½ÃÀÛÇÏ´Â µ¥ÀÌÅ¸ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE regexp_like(text,'^[0-9]');
+-- 6. ¼ýÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ·Î ½ÃÀÛÇÏ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE not regexp_like(text,'^[0-9]');
+-- 7. ´ë¹®ÀÚ·Î ½ÃÀÛÇÏ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE regexp_like(text,'^[A-Z]');
+-- 8. ¼Ò¹®ÀÚ ¿ÜÀÇ ¹®ÀÚ·Î ½ÃÀÛÇÏ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE not regexp_like(text,'^[a-z]');
+-- 9. ÇÑ±Û·Î ½ÃÀÛÇÏ´Â µ¥ÀÌÅÍ °Ë»ö
+-- ÇÑ±Û·Î ½ÃÀÛÇÑ´À µ¥ÀÌÅÍ [°¡-ÆR] ¸ðµç ÇÑ±Û 
+SELECT *
+FROM reg_tab
+WHERE regexp_like(text,'^[°¡-ÆR]');
+ 
+-- 10. µ¥ÀÌÅÍ Áß 'gg'³ª 'GG'°¡ µé¾îÀÖ´Â µ¥ÀÌÅÍ °Ë»ö
+SELECT *
+FROM reg_tab
+WHERE  text like '%gg%' or text like '%GG%';

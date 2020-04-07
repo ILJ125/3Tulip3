@@ -3,7 +3,7 @@ cafe.naver.com/javassem
 
 Oracle 
 nahyun8568@gmail.com
-Ch******19**
+Ch******19**!
 [설치할 것]
 1.JDK 자바 개발할때 자바 인식할 거
 http://www.oracle.com
