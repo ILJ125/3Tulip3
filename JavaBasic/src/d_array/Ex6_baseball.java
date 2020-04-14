@@ -1,6 +1,6 @@
 package d_array;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Ex6_baseball {
 
@@ -25,7 +25,7 @@ public class Ex6_baseball {
 					}
 				}
 			}
-			System.out.print(baseball[i]+" ");//컴퓨터 입력 숫자를 알고싶어서 출력해 봄
+//			System.out.print(baseball[i]+" ");//컴퓨터 입력 숫자를 알고싶어서 출력해 봄
 		}
 		System.out.println();//컴퓨터 결과 값 보고 뛰어쓰기 한번 하고 싶었어
 		
@@ -34,6 +34,11 @@ public class Ex6_baseball {
 		//입력자에게 숫자 입력 받기
 		HERE://중복이 있을 경우 continue로 do 반복문 블록의 제일 끝으로 가서 다시 반복 시키기 위해서 
 			do{
+//				try {
+//					Thread.sleep(3000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
 				strike=0;//정답을 못 맞췄을 때 다시 strike와 ball을 초기화 시켜줘야지 게임 진행에 오류가 없다.
 				ball=0;
 				Scanner input=new Scanner(System.in);//Scanner 통로 선언
