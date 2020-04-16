@@ -16,7 +16,6 @@ public class Test2 extends JFrame{
 		super("나의 창2");
 		
 		//객체 생성
-	
 		Mrb=new JRadioButton("Man");
 		Wrb=new JRadioButton("Woman",true);
 		Adultrb=new JRadioButton("Adult");

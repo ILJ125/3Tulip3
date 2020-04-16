@@ -59,6 +59,7 @@ public class InfoModelImpl implements InfoModel {
 
 			// 5.전송
 			ResultSet rs = st.executeQuery();
+			
 			// while문을 벗어나면 vo에 저장한 데이터가 다 날라가 가기 때문에
 			// while문이 몇번 돌지 모르게 때문에 ArrayList를 만들어준다.
 			ArrayList<InfoVO> list = new ArrayList<InfoVO>();
