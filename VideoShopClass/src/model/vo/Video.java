@@ -9,6 +9,16 @@ public class Video {
 	String actor;					// 배우
 	String exp;					// 설명
 	
+	public Video() {};
+	public Video(String genre,String videoName,String director,String actor, String exp) 
+	{
+		this.genre=genre;
+		this.videoName=videoName;
+		this.director=director;
+		this.actor=actor;
+		this.exp=exp;
+	}
+	
 	public int getVideoNo() {
 		return videoNo;
 	}
