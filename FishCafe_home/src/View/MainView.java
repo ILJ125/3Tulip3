@@ -16,6 +16,8 @@ public class MainView extends JPanel {
 	int max = 20;// 최대 손님수
 
 	JButton bcustom[] = new JButton[max];
+	JLabel lcustom[]=new JLabel[max];
+	JPanel pcustom[]=new JPanel[max];
 
 	JButton bstart;// 버튼을 누른 시점을 기준으로 시간 계산
 	JButton bend;// 시간 종료 후 요금 계산
@@ -44,6 +46,8 @@ public class MainView extends JPanel {
 		// 멤버 변수 객체 생성
 		for (int i = 0; i < bcustom.length; i++) {
 			bcustom[i] = new JButton();
+			lcustom[i]=new JLabel(String.valueOf(i+1)+"번 손님");
+			pcustom[i]=new JPanel();
 		}
 		bstart = new JButton("시작~");
 		bend = new JButton("종료");
@@ -52,10 +56,15 @@ public class MainView extends JPanel {
 		
 		// 화면 구성
 		// 붙이기
+		for (int i = 0; i < bcustom.length; i++) {
+		pcustom[i].setLayout(new BorderLayout());
+		pcustom[i].add(lcustom[i],BorderLayout.NORTH);
+		pcustom[i].add(bcustom[i],BorderLayout.CENTER);
+		}
 		// 전체 구성
 		setLayout(new GridLayout(4, 5));
 		for (int i = 0; i < bcustom.length; i++) {
-			add(bcustom[i]);
+			add(pcustom[i]);
 		}
 	}
 
@@ -125,13 +134,12 @@ public class MainView extends JPanel {
 	}
 	public class Thr_usingtime extends Thread {
 		long time[] = new long[max];
-		JLabel lb;
 		int index=0;
 		
 		boolean stop=true;
 
 		Thr_usingtime(int index) {
-			this.index=index;// dialog titlenum=cus_index=1부터 시작한다
+			this.index=index;//
 		}
 
 		public void run() {
@@ -148,7 +156,7 @@ public class MainView extends JPanel {
 						}
 					} else if (endtime[index] != 0) {
 						stop=false;
-						endtime[index] = 0;
+						endtime[index] = 0; 
 						bcustom[index].setText("");
 						return;
 					}
@@ -161,9 +169,6 @@ public class MainView extends JPanel {
 			stop=true;
 		}
 	}
-
-	
-
 	// 시간 시작
 	public void timeStart() {
 		if (starttime[cus_index] == 0) {
