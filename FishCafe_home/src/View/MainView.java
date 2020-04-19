@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class MainView extends JPanel {
 	JButton bAddpoint;// 낚시로 낚은 물고기 이벤트로 포인트 지급
 	JButton bUsepoint;// 포인트 사용
 
-	JLabel luseingtime ;
+	JLabel lusingtime[]=new JLabel[max];
 
 	int dialogTitlenum[] = new int[max];// 다이얼로그 타이틀 이름
 	int cus_index = 0;// 클릭한 버튼의 손님의 팔찌번호 가져오기 위해서
@@ -48,23 +49,25 @@ public class MainView extends JPanel {
 		for (int i = 0; i < bcustom.length; i++) {
 			bcustom[i] = new JButton();
 			dialog[i] = new JDialog();
+			lusingtime[i] = new JLabel("이용 시간");
 			dialogTitlenum[i] = i + 1;
 		}
 		bstart = new JButton("시작~");
 		bend = new JButton("종료");
 		bAddpoint = new JButton("포인트 추가");
 		bUsepoint = new JButton("포인트 사용");
-//		using = new JLabel("뀨");--------------------------------------
+		
 		// 화면 구성
-
 		// 붙이기
-
-		// 전체 구성
-		setLayout(new GridLayout(5, 5));
+		JPanel pbtn = new JPanel();
+		pbtn.setLayout(new GridLayout(4, 5));
 		for (int i = 0; i < bcustom.length; i++) {
-			add(bcustom[i]);
+			pbtn.add(bcustom[i]);
 		}
-//		add(using);
+		// 전체 구성
+		setLayout(new BorderLayout());
+		add(pbtn, BorderLayout.CENTER);
+		add(lusingtime[cus_index], BorderLayout.SOUTH);
 	}
 
 	public void eventProc() {
@@ -118,9 +121,9 @@ public class MainView extends JPanel {
 	class ButtonEventHandler implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			JButton ov = (JButton) ev.getSource();
-			// ---------------------------------------------
+			Thr_usingtime ut = new Thr_usingtime(lusingtime);
 			if (ov == bstart) {
-			
+				ut.start();
 				timeStart(); // 시간 시작
 			} else if (ov == bend) {
 				timeEnd(); // 시간 종료
@@ -132,35 +135,41 @@ public class MainView extends JPanel {
 		}
 	}
 
-//	// --------------------------------------------------------
-//	public class usingt extends Thread {
-//		long time = 0;
-//		JLabel lb;
-//		boolean stop;
-//
-//		usingt(JLabel lb) {
-//			this.lb = lb;
-//		}
-//		public void run() {
-//			boolean yes=true;
-//			do{
-//				try {
-//
-//				Thread.sleep(1000);
-//				time +=1;
-//				if (time < 60) {
-//					lb.setText(time + "초");
-//				} else if (time < 3600) {
-//					lb.setText((int) (time / 60) + "분" + time % 60 + "초");
-//				}
-//				} catch (InterruptedException e) {
-//			
-//					System.out.println("오류");
-//					
-//				}
-//			}while(yes) ;
-//		}
-//	}
+	public class Thr_usingtime extends Thread {
+		long time = 0;
+		JLabel lb;
+		boolean stop=true;
+
+		Thr_usingtime(JLabel lb) {
+			this.lb = lb;
+		}
+
+		public void run() {
+			do {
+				try {
+					if (endtime[cus_index] == 0) {
+						Thread.sleep(1000);
+						time += 1;
+						if (time < 60) {
+							lb.setText(time + "초");
+						} else if (time < 3600) {
+							lb.setText((int) (time / 60) + "분" + time % 60 + "초");
+						}
+					} else if (endtime[cus_index] != 0) {
+						stop=false;
+						endtime[cus_index] = 0;
+						return;
+					}
+
+				} catch (InterruptedException e) {
+
+					System.out.println("오류");
+				}
+			}while (stop);
+			stop=false;
+		}
+	}
+
 	// 시간 시작
 	public void timeStart() {
 		if (starttime[cus_index] == 0) {
@@ -192,7 +201,7 @@ public class MainView extends JPanel {
 			// 이용시간 출력
 			System.out.println(usinghours + "시간 " + usingmin + "분 " + usingsec + "초");
 			// 초기화
-			endtime[cus_index] = 0;
+
 			starttime[cus_index] = 0;
 			usingtime = 0;
 			usinghours = 0;
