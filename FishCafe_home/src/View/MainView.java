@@ -17,19 +17,17 @@ public class MainView extends JPanel {
 
 	JButton bcustom[] = new JButton[max];
 
-	JDialog dialog[] = new JDialog[max];
 	JButton bstart;// 버튼을 누른 시점을 기준으로 시간 계산
 	JButton bend;// 시간 종료 후 요금 계산
 	JButton bAddpoint;// 낚시로 낚은 물고기 이벤트로 포인트 지급
 	JButton bUsepoint;// 포인트 사용
 
-	JLabel lusingtime[]=new JLabel[max];
+	JLabel lusingtime;
 
-	int dialogTitlenum[] = new int[max];// 다이얼로그 타이틀 이름
 	int cus_index = 0;// 클릭한 버튼의 손님의 팔찌번호 가져오기 위해서
 	long starttime[] = new long[max]; // 시작 시간
 	long endtime[] = new long[max]; // 끝나는 시간
-	long usingtime = 0;
+	long usingtime = 0;//정확한 usingtime
 	int usinghours = 0;
 	int usingmin = 0;
 	int usingsec = 0;
@@ -41,16 +39,11 @@ public class MainView extends JPanel {
 		addLayout();
 		eventProc();
 	}
-
 	// 화면설계 메소드
 	public void addLayout() {
-
 		// 멤버 변수 객체 생성
 		for (int i = 0; i < bcustom.length; i++) {
 			bcustom[i] = new JButton();
-			dialog[i] = new JDialog();
-			lusingtime[i] = new JLabel("이용 시간");
-			dialogTitlenum[i] = i + 1;
 		}
 		bstart = new JButton("시작~");
 		bend = new JButton("종료");
@@ -59,15 +52,11 @@ public class MainView extends JPanel {
 		
 		// 화면 구성
 		// 붙이기
-		JPanel pbtn = new JPanel();
-		pbtn.setLayout(new GridLayout(4, 5));
-		for (int i = 0; i < bcustom.length; i++) {
-			pbtn.add(bcustom[i]);
-		}
 		// 전체 구성
-		setLayout(new BorderLayout());
-		add(pbtn, BorderLayout.CENTER);
-		add(lusingtime[cus_index], BorderLayout.SOUTH);
+		setLayout(new GridLayout(4, 5));
+		for (int i = 0; i < bcustom.length; i++) {
+			add(bcustom[i]);
+		}
 	}
 
 	public void eventProc() {
@@ -75,7 +64,7 @@ public class MainView extends JPanel {
 		for (int i = 0; i < bcustom.length; i++) {
 			bcustom[i].addActionListener(new DialogActionListener());
 		}
-
+		
 		bstart.addActionListener(btnHandler);
 		bend.addActionListener(btnHandler);
 		bAddpoint.addActionListener(btnHandler);
@@ -91,7 +80,7 @@ public class MainView extends JPanel {
 
 		private void CreateDialog() {
 
-			setTitle(cus_index + "번 손님");
+			setTitle( String.valueOf(cus_index+1)+ "번 손님");
 			setSize(600, 600);
 			// 붙이기
 			setLayout(new GridLayout(4, 1));
@@ -110,7 +99,7 @@ public class MainView extends JPanel {
 
 			for (int i = 0; i < bcustom.length; i++)
 				if (o == bcustom[i]) {
-					cus_index = dialogTitlenum[i];
+					cus_index =i;
 					CreateDialog();
 				}
 		}
@@ -121,7 +110,7 @@ public class MainView extends JPanel {
 	class ButtonEventHandler implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			JButton ov = (JButton) ev.getSource();
-			Thr_usingtime ut = new Thr_usingtime(lusingtime);
+			Thr_usingtime ut = new Thr_usingtime(cus_index);
 			if (ov == bstart) {
 				ut.start();
 				timeStart(); // 시간 시작
@@ -134,30 +123,33 @@ public class MainView extends JPanel {
 			}
 		}
 	}
-
 	public class Thr_usingtime extends Thread {
-		long time = 0;
+		long time[] = new long[max];
 		JLabel lb;
+		int index=0;
+		
 		boolean stop=true;
 
-		Thr_usingtime(JLabel lb) {
-			this.lb = lb;
+		Thr_usingtime(int index) {
+			this.index=index;// dialog titlenum=cus_index=1부터 시작한다
 		}
 
 		public void run() {
 			do {
 				try {
-					if (endtime[cus_index] == 0) {
+					if (endtime[index] == 0) {
 						Thread.sleep(1000);
-						time += 1;
-						if (time < 60) {
-							lb.setText(time + "초");
-						} else if (time < 3600) {
-							lb.setText((int) (time / 60) + "분" + time % 60 + "초");
+						time[index] += 1;
+
+						if (time[index] < 60) {
+							bcustom[index].setText("이용시간 : "+String.valueOf(time[index]) + "초");
+						} else if (time[index] < 3600) {
+							bcustom[index].setText("이용시간 : "+String.valueOf((int)(time[index] / 60)) + "분" + String.valueOf(time[index] % 60) + "초");
 						}
-					} else if (endtime[cus_index] != 0) {
+					} else if (endtime[index] != 0) {
 						stop=false;
-						endtime[cus_index] = 0;
+						endtime[index] = 0;
+						bcustom[index].setText("");
 						return;
 					}
 
@@ -166,9 +158,11 @@ public class MainView extends JPanel {
 					System.out.println("오류");
 				}
 			}while (stop);
-			stop=false;
+			stop=true;
 		}
 	}
+
+	
 
 	// 시간 시작
 	public void timeStart() {
@@ -187,21 +181,21 @@ public class MainView extends JPanel {
 		if (starttime[cus_index] == 0) {
 			JOptionPane.showMessageDialog(null, "아직 손님이 지정되지 않은 팔찌 번호입니다.");
 		} else {
-			// 종류시간
+			// 종료시간
 			endtime[cus_index] = System.currentTimeMillis();
 			String str = dayTime.format(endtime[cus_index]);
 			// 종료시간 출력
 			System.out.println("종료시간" + str);
 			// 이용시간
 			usingtime = (endtime[cus_index] - starttime[cus_index]);
-			// 이용시간 테스트
-			usinghours = (int) usingtime / (1000 * 60 * 60);
-			usingmin = (int) usingtime / (1000 * 60) - (usinghours * 60);
-			usingsec = ((int) usingtime % (1000 * 60)) / 1000;
+				// 이용시간 테스트
+				usinghours = (int) usingtime / (1000 * 60 * 60);
+				usingmin = (int) usingtime / (1000 * 60) - (usinghours * 60);
+				usingsec = ((int) usingtime % (1000 * 60)) / 1000;
 			// 이용시간 출력
 			System.out.println(usinghours + "시간 " + usingmin + "분 " + usingsec + "초");
 			// 초기화
-
+			//endtime 초기화는  Thread문에서 할게용~
 			starttime[cus_index] = 0;
 			usingtime = 0;
 			usinghours = 0;
