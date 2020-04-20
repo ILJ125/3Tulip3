@@ -23,7 +23,7 @@ public class Fishing_Ground extends JFrame{
 
 		// 화면사이즈
 		add(pane);
-		setSize(900,700);
+		setSize(1200,800);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

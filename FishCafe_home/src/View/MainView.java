@@ -8,12 +8,13 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-public class MainView extends JPanel {
+public class MainView extends JPanel{
 	int max = 20;// 최대 손님수
 
 	JButton bcustom[] = new JButton[max];// 고객 선택 할 때
@@ -68,34 +69,43 @@ public class MainView extends JPanel {
 	public void addLayout() {
 		setLayout(new BorderLayout());
 
-		// Center - 상품이랑, 좌석
+		// 1.Center - 상품이랑, 좌석
 		JPanel center = new JPanel();
-//		setLayout(new GridLayout(1,2));
-		JPanel center_right = new JPanel();
-		setLayout(new BorderLayout());
-		// 고객 번호들 center
-		JPanel c_right_center = new JPanel();
-		setLayout(new GridLayout(5, 4));
-		for (int i = 0; i < max; i++) {
-			c_right_center.add(new JLabel(String.valueOf(i + 1) + "번"));
-			c_right_center.add(bcustom[i]);
-		}
-		center_right.add(c_right_center, BorderLayout.CENTER);
-		// 버튼 들 - 좌석확인, 시작,종료
-		JPanel c_right_south = new JPanel();
-		setLayout(new GridLayout(2, 1));
-		c_right_south.add(bconfirm);
-		JPanel start_end = new JPanel();
-		setLayout(new GridLayout(1, 2));
-		start_end.add(bstart);
-		start_end.add(bend);
-		c_right_south.add(start_end);
-		center_right.add(c_right_south, BorderLayout.SOUTH);
-		center.add(center_right);
+		center.setLayout(new GridLayout(1,2));
+			//2.center_right
+			JPanel center_right = new JPanel();
+			center_right.setLayout(new BorderLayout());
+				// 3-1.고객 번호들 c_r_center
+				JPanel c_right_center = new JPanel();
+				c_right_center.setLayout(new GridLayout(5, 4));
+				//4-1.가각
+				JPanel each[]=new JPanel[max];
+				for (int i = 0; i < max; i++) {
+					each[i]=new JPanel(new BorderLayout());
+					each[i].add(new JLabel(String.valueOf(i + 1) + "번"),BorderLayout.NORTH);
+					each[i].add(bcustom[i],BorderLayout.CENTER);
+					c_right_center.add(each[i]);
+				}
+				//3-1 붙임
+				center_right.add(c_right_center, BorderLayout.CENTER);
+				// 3-2.c_r_south버튼 들 - 좌석확인, 시작,종료
+				JPanel c_right_south = new JPanel();
+				c_right_south.setLayout(new GridLayout(2, 1));
+				c_right_south.add(bconfirm);
+					//4-2.start-end
+					JPanel start_end = new JPanel();
+					start_end.setLayout(new GridLayout(1, 2));
+					start_end.add(bstart);
+					start_end.add(bend);
+					//4.붙임
+					c_right_south.add(start_end);
+				//3-2.붙임
+				center_right.add(c_right_south, BorderLayout.SOUTH);
+			//2.붙임
+			center.add(center_right);
+		//1.붙임	
 		add(center, BorderLayout.CENTER);
-
-		setVisible(true);
-
+		
 	}
 
 	// 버튼에 eventHandler 부여
@@ -153,7 +163,7 @@ public class MainView extends JPanel {
 			}
 
 		}
-
+	}
 		// 버튼 이벤트
 		public class ButtonEventHandler implements ActionListener {
 			public void actionPerformed(ActionEvent ev) {
@@ -174,44 +184,44 @@ public class MainView extends JPanel {
 			}
 		}
 
-		public class Thr_usingtime extends Thread {
-			long time[] = new long[max];
-			int index = 0;
-
-			boolean stop = true;
-
-			Thr_usingtime(int index) {
-				this.index = index;//
-			}
-
-			public void run() {
-				do {
-					try {
-						if (endtime[index] == 0) {
-							Thread.sleep(1000);
-							time[index] += 1;
-
-							if (time[index] < 60) {
-								lusingtime[index].setText("이용시간 : " + String.valueOf(time[index]) + "초");
-							} else if (time[index] < 3600) {
-								lusingtime[index].setText("이용시간 : " + String.valueOf((int) (time[index] / 60)) + "분"
-										+ String.valueOf(time[index] % 60) + "초");
-							}
-						} else if (endtime[index] != 0) {
-							stop = false;
-							endtime[index] = 0;
-							lusingtime[index].setText("이용시간");
-							return;
-						}
-
-					} catch (InterruptedException e) {
-
-						System.out.println("오류");
-					}
-				} while (stop);
-				stop = true;
-			}
-		}
+//		public class Thr_usingtime extends Thread {
+//			long time[] = new long[max];
+//			int index = 0;
+//
+//			boolean stop = true;
+//
+//			Thr_usingtime(int index) {
+//				this.index = index;//
+//			}
+//
+//			public void run() {
+//				do {
+//					try {
+//						if (endtime[index] == 0) {
+//							Thread.sleep(1000);
+//							time[index] += 1;
+//
+//							if (time[index] < 60) {
+//								lusingtime[index].setText("이용시간 : " + String.valueOf(time[index]) + "초");
+//							} else if (time[index] < 3600) {
+//								lusingtime[index].setText("이용시간 : " + String.valueOf((int) (time[index] / 60)) + "분"
+//										+ String.valueOf(time[index] % 60) + "초");
+//							}
+//						} else if (endtime[index] != 0) {
+//							stop = false;
+//							endtime[index] = 0;
+//							lusingtime[index].setText("이용시간");
+//							return;
+//						}
+//
+//					} catch (InterruptedException e) {
+//
+//						System.out.println("오류");
+//					}
+//				} while (stop);
+//				stop = true;
+//			}
+//		}
 
 		// 시간 시작
 		public void timeStart() {
@@ -253,5 +263,5 @@ public class MainView extends JPanel {
 			}
 		}
 
-	}
+	
 }
