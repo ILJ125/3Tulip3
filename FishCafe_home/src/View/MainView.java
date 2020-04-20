@@ -121,7 +121,8 @@ public class MainView extends JPanel {
 			JButton ov = (JButton) ev.getSource();
 			Thr_usingtime ut = new Thr_usingtime(cus_index);
 			if (ov == bstart) {
-				ut.start();
+				if(starttime[cus_index] == 0) {
+				ut.start();}
 				timeStart(); // 시간 시작
 			} else if (ov == bend) {
 				timeEnd(); // 시간 종료
@@ -145,7 +146,7 @@ public class MainView extends JPanel {
 		public void run() {
 			do {
 				try {
-					if (endtime[index] == 0) {
+					if (endtime[index] == 0 ) {
 						Thread.sleep(1000);
 						time[index] += 1;
 
@@ -158,6 +159,7 @@ public class MainView extends JPanel {
 						stop=false;
 						endtime[index] = 0; 
 						bcustom[index].setText("");
+						time[index]=0;
 						return;
 					}
 
