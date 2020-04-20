@@ -1,5 +1,4 @@
 package View;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-public class ItemView extends JPanel {
+public class ItemView2 extends JPanel {
    // 멤버변수 선언
    JButton bItem[] = new JButton[20];
 
@@ -21,9 +20,9 @@ public class ItemView extends JPanel {
    JButton bItemOrder, bItemDelete;
    JLabel won;
    
-   int sum=0; 
+   int sum=0;
 
-   public ItemView() {
+   public ItemView2() {
       addLayout();
       eventProc();
    }
