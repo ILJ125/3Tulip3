@@ -27,7 +27,6 @@ public class MainView extends JPanel {
 	//디자인
 	int max = 20;// 최대 손님수
 
-	
 	JButton bcustom[] = new JButton[max];// 고객 선택 할 때
 	JButton bcon_custom[] = new JButton[max];// dialog 한눈에 보기 에 좌석
 	JLabel lcon_custom[] = new JLabel[max];//다이얼로그

@@ -9,7 +9,6 @@ public class Fishing_Ground extends JFrame{
 	MainView main;
 //	ItemView item;
 //	RecordView record;
-
 	//메인화면구성
 	public Fishing_Ground() {
 		super("실내낚시터");

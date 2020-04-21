@@ -103,7 +103,6 @@ public class Connect extends JFrame {
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				fg=new Fishing_Ground();
 				return;
-
 			}
 
 			JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
