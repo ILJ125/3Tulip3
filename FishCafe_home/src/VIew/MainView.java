@@ -64,7 +64,6 @@ public class MainView extends JPanel {
 	JLabel won;
 
 	int sum = 0;
-
 	SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
 	public MainView() {

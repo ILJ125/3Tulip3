@@ -12,5 +12,4 @@ public interface Maindao {
 	public ArrayList ConfirmSeat() throws Exception;
 	//주문 버튼을 누르면 매출내역 Table 에  insert 합니다.
 	public void addSales() throws Exception;
-	
 }

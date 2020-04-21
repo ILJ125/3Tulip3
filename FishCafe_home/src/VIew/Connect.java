@@ -32,7 +32,6 @@ public class Connect extends JFrame {
 	
 	int confirm =0;
 	public Connect() {
-
 		super("로그인 창!");
 
 		this.setContentPane(loginPanel);

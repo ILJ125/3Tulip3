@@ -18,7 +18,6 @@ public class Fishing_Ground extends JFrame{
 		pane.add("메인",main);
 //		pane.add("매출기록", record);
 //		pane.add("판매",item);
-
 		// 화면사이즈
 		add(pane);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
