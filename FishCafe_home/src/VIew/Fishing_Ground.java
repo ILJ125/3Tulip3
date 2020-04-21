@@ -1,13 +1,11 @@
+package VIew;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-
-import View.MainView;
 public class Fishing_Ground extends JFrame{
 	//멤버변수 선언
 	MainView main;
 //	ItemView item;
 //	RecordView record;
-
 	//메인화면구성
 	public Fishing_Ground() {
 		super("실내낚시터");
@@ -23,15 +21,15 @@ public class Fishing_Ground extends JFrame{
 
 		// 화면사이즈
 		add(pane);
-		setSize(1200,800);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setSize(1980,1000);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-
 	public static void main(String[] args) {
-		new Fishing_Ground();
+		Connect login = new Connect();
 
+		}	
 	}
 
-}
