@@ -23,7 +23,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 public class MainView extends JPanel {
-	
 	//디자인
 	int max = 20;// 최대 손님수
 
