@@ -278,10 +278,11 @@ public class MainView extends JPanel {
 			Thr_usingtime ut = new Thr_usingtime(cus_index);
 
 			if (ov == bstart) {
-				if (starttime[cus_index] == 0) {
-					ut.start();
+				if(cus_index==0) {JOptionPane.showConfirmDialog(null, "팔찌 번호를 먼저 지정해주세요.");}
+				else if(seat_num[cus_index]==0) { JOptionPane.showConfirmDialog(null, cus_index+"번 손님께 지정된 좌석이 없습니다.좌석을 지정해주세요.");
+				new confirmSeat();}else if (starttime[cus_index] !=0) {
+					JOptionPane.showConfirmDialog(null, "이미 낚시를 진행중인 손님 입니다.");
 				}
-				timeStart();
 			} else if (ov == bend) {
 				timeEnd();
 			} else if (ov == bconfirm) {
@@ -324,7 +325,11 @@ public class MainView extends JPanel {
 //									System.out.println((seat_num[seat_cusnum[seat_index]]+1)+"=>좌석 번호       "+(seat_cusnum[seat_index]+1) +"=>손님번호" );
 											// 좌석 버튼에 손님 번호를 입력해줄거야
 											bcon_seat[seat_index].setText(seat_cusnum[seat_index] + "번 손님 ");
+											bcustom[cus_index].setBorder(new LineBorder(Color.RED, 3));
 											// 다른 상황이 오면 위험하니깐
+											if(starttime[cus_index]==0) {
+												ut.start();
+											}
 											timeStart();
 										}
 									}
@@ -368,11 +373,13 @@ public class MainView extends JPanel {
 						String sec = String.valueOf(time[index] % (60 * 60) % 60);
 						String min = String.valueOf(time[index] % (60 * 60) / 60);
 						String hours = String.valueOf(time[index] / (60 * 60));
-						lcon_usingtime[index].setText(hours + "시" + min + "분" + sec + "초");
+						lcon_usingtime[seat_num[index]].setText(hours + "시" + min + "분" + sec + "초");
 					} else if (endtime[index] != 0) {
-						stop = false;
+						System.out.println("뀨우?");
+						lcon_usingtime[seat_num[index]].setText("이용시간");
 						endtime[index] = 0;
-						lcon_usingtime[index].setText("이용시간");
+						stop = false;
+					
 						return;
 					}
 
@@ -432,4 +439,3 @@ public class MainView extends JPanel {
 
 }
 
-//		.setBorder(new LineBorder(Color.RED, 3));
