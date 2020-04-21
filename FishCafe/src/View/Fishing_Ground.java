@@ -1,9 +1,9 @@
+package View;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import View.ItemView;
+import View.Connect;
 import View.MainView;
-import View.RecordView;
 public class Fishing_Ground extends JFrame{
 	//멤버변수 선언
 	MainView main;
@@ -25,15 +25,16 @@ public class Fishing_Ground extends JFrame{
 
 		// 화면사이즈
 		add(pane);
-		setSize(900,700);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setSize(1980,1000);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 
 	public static void main(String[] args) {
-		new Fishing_Ground();
+		Connect login = new Connect();
 
+		}	
 	}
 
-}
