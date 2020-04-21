@@ -1,6 +1,5 @@
 package View;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,13 +22,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 public class MainView extends JPanel {
-	//디자인
+	// 디자인
 	int max = 20;// 최대 손님수
-
+//cus_index => 손님 버튼 눌렀을 때이다.
+//좌석 번호 눌렀을 때에 입력받을 값이 필요한가?--------------------------------------------------------??????
 	JButton bcustom[] = new JButton[max];// 고객 선택 할 때
-	JButton bcon_custom[] = new JButton[max];// dialog 한눈에 보기 에 좌석
-	JLabel lcon_custom[] = new JLabel[max];//다이얼로그
-	JPanel pcon_custom[] = new JPanel[max];//다이얼로그
+	JButton bcon_seat[] = new JButton[max];// dialog 한눈에 보기 에 좌석
+	JLabel lcon_custom[] = new JLabel[max];// 다이얼로그
+	JPanel pcon_custom[] = new JPanel[max];// 다이얼로그
 
 	JButton bstart;// 버튼을 누른 시점을 기준으로 시간 계산
 	JButton bend;// 시간 종료 후 요금 계산
@@ -40,9 +40,10 @@ public class MainView extends JPanel {
 	JButton bconfirm;// 고객 상황 한눈에 보기
 
 	JLabel lcon_usingtime[] = new JLabel[max];
-	JPanel peach[] = new JPanel[max];//main
-
-	int cus_index = 0;// 클릭한 버튼의 손님의 팔찌번호 가져오기 위해서
+	JPanel peach[] = new JPanel[max];// main
+	int seat_num[]=new int[max];
+	int seat_cusnum[] = new int[max];//좌석에 손님 번호 
+	int cus_index = 0;// 클릭한 버튼의 손님의 팔찌번호 가져오기 위해서 //cus_index의 초기화 값 = -1
 	long starttime[] = new long[max]; // 시작 시간
 	long endtime[] = new long[max]; // 끝나는 시간
 	long usingtime = 0;// 정확한 usingtime
@@ -75,12 +76,13 @@ public class MainView extends JPanel {
 		for (int i = 0; i < max; i++) {
 			// 메인
 			bItem[i] = new JButton();
-			bcon_custom[i] = new JButton();
+			bcon_seat[i] = new JButton();
+			bcon_seat[i].setPreferredSize(new Dimension(230, 150));
 			bcustom[i] = new JButton();
-			lcon_custom[i] = new JLabel(String.valueOf(i + 1) + "번 손님");
+			lcon_custom[i] = new JLabel(String.valueOf(i + 1) + "번 좌석");
 			pcon_custom[i] = new JPanel();
 			lcon_usingtime[i] = new JLabel("이용시간");
-			lcon_usingtime[i].setFont(new Font("usingtime",Font.BOLD,13));
+			lcon_usingtime[i].setFont(new Font("usingtime", Font.BOLD, 13));
 			peach[i] = new JPanel();// 손님 마다에 패널
 		}
 		bItemOrder = new JButton(" 주문하기 ");
@@ -182,7 +184,7 @@ public class MainView extends JPanel {
 		ButtonEventHandler btnHandler = new ButtonEventHandler();
 		for (int i = 0; i < bcustom.length; i++) {
 			bcustom[i].addActionListener(btnHandler);
-			bcon_custom[i].addActionListener(btnHandler);
+			bcon_seat[i].addActionListener(btnHandler);
 		}
 		bconfirm.addActionListener(new DialogActionListener());
 		bstart.addActionListener(btnHandler);
@@ -207,16 +209,59 @@ public class MainView extends JPanel {
 				lcon_usingtime[i].setBorder(new EtchedBorder());
 				pcon_custom[i].setLayout(new BorderLayout());
 				pcon_custom[i].add(lcon_custom[i], BorderLayout.NORTH);
-				pcon_custom[i].add(bcon_custom[i], BorderLayout.CENTER);
+				pcon_custom[i].add(bcon_seat[i], BorderLayout.CENTER);
 				pcon_custom[i].add(lcon_usingtime[i], BorderLayout.SOUTH);
 			}
 			// 전체 구성
-			setLayout(new GridLayout(4, 5));
-			for (int i = 0; i < bcustom.length; i++) {
-				add(pcon_custom[i]);
+			setLayout(new BorderLayout());
+			JPanel north = new JPanel();
+			north.setLayout(new BorderLayout());
+			north.add(new JLabel(), BorderLayout.EAST);
+			JPanel north_center = new JPanel();
+			north_center.setLayout(new GridLayout(1, 9));
+			for (int i = 0; i < 7; i++) {
+				north_center.add(pcon_custom[i]);
 			}
+			north.add(north_center, BorderLayout.CENTER);
+			north.add(new JLabel(), BorderLayout.WEST);
+			add(north, BorderLayout.NORTH);
+			// 센터
+			JPanel center = new JPanel();
+			center.setLayout(new BorderLayout());
+			JPanel center_west = new JPanel();
+			center_west.setLayout(new GridLayout(3, 1));
+			for (int i = 19; i > 16; i--) {
+				center_west.add(pcon_custom[i]);
+			}
+			center.add(center_west, BorderLayout.WEST);
+			JPanel center_center = new JPanel();
+			center_center.setLayout(new GridLayout(1, 1));
+			center_center.setBackground(Color.BLUE);
+			center_center.add(new JLabel());
+			center.add(center_center, BorderLayout.CENTER);
+			JPanel center_east = new JPanel();
+			center_east.setLayout(new GridLayout(3, 1));
+			for (int i = 7; i < 10; i++) {
+				center_east.add(pcon_custom[i]);
+			}
+			center.add(center_east, BorderLayout.EAST);
+			add(center, BorderLayout.CENTER);
+
+			// south
+			JPanel south = new JPanel();
+			south.setLayout(new BorderLayout());
+			south.add(new JLabel(), BorderLayout.EAST);
+			JPanel south_center = new JPanel();
+			south_center.setLayout(new GridLayout(1, 9));
+			for (int i = 16; i >= 10; i--) {
+				south_center.add(pcon_custom[i]);
+			}
+			south.add(south_center, BorderLayout.CENTER);
+			south.add(new JLabel(), BorderLayout.WEST);
+			add(south, BorderLayout.SOUTH);
+
 			setVisible(true);
-			setSize(1000, 800);
+			setSize(1800, 1000);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		}
 
@@ -248,12 +293,39 @@ public class MainView extends JPanel {
 			} else {
 				for (int i = 0; i < max; i++) {
 					if (bcustom[i] == ov) {
-						BorderSetting(i);
-					}else if(bcon_custom[i]== ov) {
-						BorderSetting(i);
+						//번호 누를때 원래 눌렀던 번호 없애기
+					} else if (bcon_seat[i] == ov) {
+						 //버튼 눌렀을 때  좌석 번호와 고객번호에 테두리가 바뀐다. 
+							if (starttime[cus_index] == 0) {
+								int result = JOptionPane.showConfirmDialog(null,
+										String.valueOf(cus_index + 1) + "번 손님을 이자리에 지정하시겠습니까?", "자리지정",
+										JOptionPane.YES_NO_OPTION);
+								if (result == JOptionPane.YES_OPTION) {
+									// con_custom에 서 버튼 index는 좌석번호 =i이므로 seat_num[손님번호]= 손님의 좌석번호
+									if (cus_index == 0) {
+										JOptionPane.showConfirmDialog(null, "손님 번호를 지정하고 다시 와주세요");
+									}
+									seat_cusnum[i] = cus_index;//i에 좌석번호가 들어가면 seat_cusnum이 손님번호
+									//내가 선택한 버튼 index i (=좌석번호)를 cus_index에 줄게
+									cus_index=i;
+									seat_num[seat_cusnum[i]]=cus_index;// seat_num[seat_cusnum[i]]=cus_index(좌석번호);
+									noBorderSetting(cus_index);
+									//n번 손님의 좌석 번호 seat_num[n]=> seat_num[seat_cusnum[i]]=cus_index;
+									//함수 가져다 붙이기 ---------------------------------------------------------------------------------
+									//이용 시간이랑 팔찌번호만  가져와야겠다.
+									//테스트
+									System.out.println((seat_cusnum[i]+1) + "번 손님 의 좌석 : " +(i+1)+"번");
+									System.out.println((seat_num[seat_cusnum[i]]+1)+"=>좌석 번호       "+(seat_cusnum[i]+1) +"=>손님번호" );
+									//좌석 버튼에 손님 번호를 입력해줄거야
+									bcon_seat[cus_index].setText((seat_cusnum[cus_index]+1)+"번 손님 ");
+									//다른 상황이 오면 위험하니깐  
+									
+								}
+							}
+						
+
 						System.out.println(cus_index);
 					}
-				
 
 				}
 			}
@@ -337,12 +409,10 @@ public class MainView extends JPanel {
 			usingsec = 0;
 		}
 	}
-	//버튼 클릭시 테두리 선택 (고객 버전)
-	public void BorderSetting (int i) {
-		pcon_custom[cus_index].setBorder(null);
-		peach[cus_index].setBorder(null);//다른 버튼 클릭하면 원래대로
-		cus_index = i;
-		peach[cus_index].setBorder(new LineBorder(Color.CYAN, 3));
-		pcon_custom[cus_index].setBorder(new LineBorder(Color.CYAN, 3));
+	public void noBorderSetting(int seat) {
+		peach[seat].setBorder(null);// 다른 버튼 클릭하면 원래대로
+		peach[seat_cusnum[seat]].setBorder(new LineBorder(Color.RED, 3));
 	}
 }
+
+//		.setBorder(new LineBorder(Color.RED, 3));

@@ -77,6 +77,7 @@ public class Connect extends JFrame {
 		loginBtn.addActionListener(loginbutton);
 		searchIDActionListener search = new searchIDActionListener();
 		idpwSearchBtn.addActionListener(search);
+		pwText.addActionListener(loginbutton);
 	}
 
 	public class LoginbtnEventHandler implements ActionListener {
@@ -97,7 +98,7 @@ public class Connect extends JFrame {
 
 			if (id.equals("kosmo") && pw.equals("kosmo")) {
 
-				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
+//				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
 				confirm = 1;
 				System.out.println(confirm);
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -125,5 +126,6 @@ public class Connect extends JFrame {
 		}
 
 	}
+	
 
 }
