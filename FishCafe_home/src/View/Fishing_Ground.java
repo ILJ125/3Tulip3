@@ -1,4 +1,4 @@
-package VIew;
+package View;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -22,10 +22,11 @@ public class Fishing_Ground extends JFrame{
 		setSize(1980,1000);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+		}
 
 	public static void main(String[] args) {
-		 new Fishing_Ground();
+//		 new Connect();
+		new Fishing_Ground();
 		}	
 	}
 

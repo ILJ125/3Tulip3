@@ -1,4 +1,4 @@
-package VIew;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -29,7 +29,6 @@ public class Connect extends JFrame {
 	JButton loginBtn = new JButton("로그인");
 
 	JButton idpwSearchBtn = new JButton("직원 정보");
-	
 	int confirm =0;
 	public Connect() {
 		super("로그인 창!");

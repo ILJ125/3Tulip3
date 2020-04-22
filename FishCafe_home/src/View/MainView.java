@@ -1,26 +1,26 @@
-package VIew;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+
+import model.MainModel;
 
 public class MainView extends JPanel {
 	// 디자인
@@ -53,6 +53,16 @@ public class MainView extends JPanel {
 	int usingmin = 0;
 	int usingsec = 0;
 	int num = 0;// 팔찌 번호
+	String[] Itemname = new String[max + 1];
+
+//	static JPanel center_center = new JPanel();
+//	{
+//	 background=new ImageIcon(MainView.class.getResource("C:\\Users\\Canon\\git\\ilj125.github.com\\FishCafe\\src\\image\\fish.png")).getImage();} 
+//	public void paint(Graphics g) 
+//	{
+//		//그리는 함수 
+//		g.drawImage(background, 0, 0, null);//background를 그려줌
+//	}
 
 	// ITem
 	JButton bItem[] = new JButton[max + 1];
@@ -79,7 +89,8 @@ public class MainView extends JPanel {
 			bItem[i] = new JButton();
 			bcon_seat[i] = new JButton();
 			bcon_seat[i].setPreferredSize(new Dimension(230, 150));
-			bcustom[i] = new JButton();
+			bcustom[i] = new JButton(i+"번 손님");
+			bcustom[i].setBorder(new LineBorder(Color.BLACK, 1));
 			lcon_custom[i] = new JLabel(i + "번 좌석");
 			pcon_custom[i] = new JPanel();
 			lcon_usingtime[i] = new JLabel("이용시간");
@@ -278,9 +289,12 @@ public class MainView extends JPanel {
 			Thr_usingtime ut = new Thr_usingtime(cus_index);
 
 			if (ov == bstart) {
-				if(cus_index==0) {JOptionPane.showConfirmDialog(null, "팔찌 번호를 먼저 지정해주세요.");}
-				else if(seat_num[cus_index]==0) { JOptionPane.showConfirmDialog(null, cus_index+"번 손님께 지정된 좌석이 없습니다.좌석을 지정해주세요.");
-				new confirmSeat();}else if (starttime[cus_index] !=0) {
+				if (cus_index == 0) {
+					JOptionPane.showConfirmDialog(null, "팔찌 번호를 먼저 지정해주세요.");
+				} else if (seat_num[cus_index] == 0) {
+					JOptionPane.showConfirmDialog(null, cus_index + "번 손님께 지정된 좌석이 없습니다.좌석을 지정해주세요.");
+					new confirmSeat();
+				} else if (starttime[cus_index] != 0) {
 					JOptionPane.showConfirmDialog(null, "이미 낚시를 진행중인 손님 입니다.");
 				}
 			} else if (ov == bend) {
@@ -327,7 +341,7 @@ public class MainView extends JPanel {
 											bcon_seat[seat_index].setText(seat_cusnum[seat_index] + "번 손님 ");
 											bcustom[cus_index].setBorder(new LineBorder(Color.RED, 3));
 											// 다른 상황이 오면 위험하니깐
-											if(starttime[cus_index]==0) {
+											if (starttime[cus_index] == 0) {
 												ut.start();
 											}
 											timeStart();
@@ -354,7 +368,7 @@ public class MainView extends JPanel {
 	}
 
 	public class Thr_usingtime extends Thread {
-		long time[] = new long[max];
+		long time[] = new long[max + 1];
 		int index = 0;
 
 		boolean stop = true;
@@ -375,11 +389,10 @@ public class MainView extends JPanel {
 						String hours = String.valueOf(time[index] / (60 * 60));
 						lcon_usingtime[seat_num[index]].setText(hours + "시" + min + "분" + sec + "초");
 					} else if (endtime[index] != 0) {
-						System.out.println("뀨우?");
 						lcon_usingtime[seat_num[index]].setText("이용시간");
 						endtime[index] = 0;
 						stop = false;
-					
+
 						return;
 					}
 
@@ -433,9 +446,12 @@ public class MainView extends JPanel {
 			bcon_seat[seat_num[cus_index]].setText("");
 			seat_cusnum[seat_num[cus_index]] = 0;
 			seat_num[cus_index] = 0;
-
 		}
 	}
-
 }
-
+//	}
+//	public void getItemname() throws Exception {
+//		MainModel mm= new MainModel();
+//		
+//	Itemname = mm.itemname();
+//	}
