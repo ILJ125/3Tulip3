@@ -5,31 +5,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+
+import model.MainModel;
 
 public class MainView extends JPanel {
 	// 디자인
 	int max = 20;// 최대 손님수
 //cus_index => 손님 버튼 눌렀을 때이다.
 //좌석 번호 눌렀을 때에 입력받을 값이 필요한가?--------------------------------------------------------??????
-	JButton bcustom[] = new JButton[max];// 고객 선택 할 때
-	JButton bcon_seat[] = new JButton[max];// dialog 한눈에 보기 에 좌석
-	JLabel lcon_custom[] = new JLabel[max];// 다이얼로그
-	JPanel pcon_custom[] = new JPanel[max];// 다이얼로그
+	JButton bcustom[] = new JButton[max + 1];// 고객 선택 할 때
+	JButton bcon_seat[] = new JButton[max + 1];// dialog 한눈에 보기 에 좌석
+	JLabel lcon_custom[] = new JLabel[max + 1];// 다이얼로그
+	JPanel pcon_custom[] = new JPanel[max + 1];// 다이얼로그
 
 	JButton bstart;// 버튼을 누른 시점을 기준으로 시간 계산
 	JButton bend;// 시간 종료 후 요금 계산
@@ -39,21 +40,32 @@ public class MainView extends JPanel {
 
 	JButton bconfirm;// 고객 상황 한눈에 보기
 
-	JLabel lcon_usingtime[] = new JLabel[max];
-	JPanel peach[] = new JPanel[max];// main
-	int seat_num[]=new int[max];
-	int seat_cusnum[] = new int[max];//좌석에 손님 번호 
+	JLabel lcon_usingtime[] = new JLabel[max + 1];
+	JPanel peach[] = new JPanel[max + 1];// main
+	int seat_index;
+	int seat_num[] = new int[max + 1];
+	int seat_cusnum[] = new int[max + 1];// 좌석에 손님 번호
 	int cus_index = 0;// 클릭한 버튼의 손님의 팔찌번호 가져오기 위해서 //cus_index의 초기화 값 = -1
-	long starttime[] = new long[max]; // 시작 시간
-	long endtime[] = new long[max]; // 끝나는 시간
+	long starttime[] = new long[max + 1]; // 시작 시간
+	long endtime[] = new long[max + 1]; // 끝나는 시간
 	long usingtime = 0;// 정확한 usingtime
 	int usinghours = 0;
 	int usingmin = 0;
 	int usingsec = 0;
 	int num = 0;// 팔찌 번호
+	String[] Itemname = new String[max + 1];
+
+//	static JPanel center_center = new JPanel();
+//	{
+//	 background=new ImageIcon(MainView.class.getResource("C:\\Users\\Canon\\git\\ilj125.github.com\\FishCafe\\src\\image\\fish.png")).getImage();} 
+//	public void paint(Graphics g) 
+//	{
+//		//그리는 함수 
+//		g.drawImage(background, 0, 0, null);//background를 그려줌
+//	}
 
 	// ITem
-	JButton bItem[] = new JButton[20];
+	JButton bItem[] = new JButton[max + 1];
 
 	JList liItemOrder;
 	Vector vecItem = new Vector();
@@ -62,7 +74,6 @@ public class MainView extends JPanel {
 	JLabel won;
 
 	int sum = 0;
-
 	SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
 	public MainView() {
@@ -73,20 +84,21 @@ public class MainView extends JPanel {
 
 	// 객체생성
 	public void make() {
-		for (int i = 0; i < max; i++) {
+		for (int i = 0; i <= max; i++) {
 			// 메인
 			bItem[i] = new JButton();
 			bcon_seat[i] = new JButton();
 			bcon_seat[i].setPreferredSize(new Dimension(230, 150));
-			bcustom[i] = new JButton();
-			lcon_custom[i] = new JLabel(String.valueOf(i + 1) + "번 좌석");
+			bcustom[i] = new JButton(i+"번 손님");
+			bcustom[i].setBorder(new LineBorder(Color.BLACK, 1));
+			lcon_custom[i] = new JLabel(i + "번 좌석");
 			pcon_custom[i] = new JPanel();
 			lcon_usingtime[i] = new JLabel("이용시간");
 			lcon_usingtime[i].setFont(new Font("usingtime", Font.BOLD, 13));
 			peach[i] = new JPanel();// 손님 마다에 패널
 		}
 		bItemOrder = new JButton(" 주문하기 ");
-		bItemOrder.setPreferredSize(new Dimension(200, 50));
+		bItemOrder.setPreferredSize(new Dimension(100, 50));
 
 		bItemDelete = new JButton("전체삭제");
 		bItemDelete.setPreferredSize(new Dimension(100, 40));
@@ -114,7 +126,7 @@ public class MainView extends JPanel {
 		// C-2-1 center_left
 		JPanel center_left = new JPanel();
 		center_left.setLayout(new GridLayout(5, 4));
-		for (int i = 0; i < bItem.length; i++) {
+		for (int i = 1; i < bItem.length; i++) {
 			center_left.add(bItem[i]);
 		}
 
@@ -127,9 +139,9 @@ public class MainView extends JPanel {
 		c_right_center.setLayout(new GridLayout(5, 4));
 		// C-4-1.가각
 
-		for (int i = 0; i < max; i++) {
+		for (int i = 1; i <= max; i++) {
 			peach[i] = new JPanel(new BorderLayout());
-			peach[i].add(new JLabel(String.valueOf(i + 1) + "번"), BorderLayout.NORTH);
+			peach[i].add(new JLabel(i + "번"), BorderLayout.NORTH);
 			peach[i].add(bcustom[i], BorderLayout.CENTER);
 			c_right_center.add(peach[i]);
 		}
@@ -186,7 +198,7 @@ public class MainView extends JPanel {
 			bcustom[i].addActionListener(btnHandler);
 			bcon_seat[i].addActionListener(btnHandler);
 		}
-		bconfirm.addActionListener(new DialogActionListener());
+		bconfirm.addActionListener(btnHandler);
 		bstart.addActionListener(btnHandler);
 		bend.addActionListener(btnHandler);
 ////		bAddpoint.addActionListener(new pointDialogActionListener());
@@ -194,18 +206,12 @@ public class MainView extends JPanel {
 	}
 
 	// 좌석 한눈에 보기
-	public class DialogActionListener extends JDialog implements ActionListener {
+	public class confirmSeat extends JFrame implements ActionListener {
 
-		public DialogActionListener() {
-			super();// JDialog 생성
-		}
-
-		private void CreateDialog() {
-
-			setTitle(String.valueOf("한 눈에 보기"));
+		public confirmSeat() {
 			// 화면 구성
 			// 붙이기
-			for (int i = 0; i < bcustom.length; i++) {
+			for (int i = 1; i < bcustom.length; i++) {
 				lcon_usingtime[i].setBorder(new EtchedBorder());
 				pcon_custom[i].setLayout(new BorderLayout());
 				pcon_custom[i].add(lcon_custom[i], BorderLayout.NORTH);
@@ -218,8 +224,8 @@ public class MainView extends JPanel {
 			north.setLayout(new BorderLayout());
 			north.add(new JLabel(), BorderLayout.EAST);
 			JPanel north_center = new JPanel();
-			north_center.setLayout(new GridLayout(1, 9));
-			for (int i = 0; i < 7; i++) {
+			north_center.setLayout(new GridLayout(1, 7));
+			for (int i = 1; i <= 7; i++) {
 				north_center.add(pcon_custom[i]);
 			}
 			north.add(north_center, BorderLayout.CENTER);
@@ -230,7 +236,7 @@ public class MainView extends JPanel {
 			center.setLayout(new BorderLayout());
 			JPanel center_west = new JPanel();
 			center_west.setLayout(new GridLayout(3, 1));
-			for (int i = 19; i > 16; i--) {
+			for (int i = 20; i >= 18; i--) {
 				center_west.add(pcon_custom[i]);
 			}
 			center.add(center_west, BorderLayout.WEST);
@@ -241,7 +247,7 @@ public class MainView extends JPanel {
 			center.add(center_center, BorderLayout.CENTER);
 			JPanel center_east = new JPanel();
 			center_east.setLayout(new GridLayout(3, 1));
-			for (int i = 7; i < 10; i++) {
+			for (int i = 8; i <= 10; i++) {
 				center_east.add(pcon_custom[i]);
 			}
 			center.add(center_east, BorderLayout.EAST);
@@ -252,8 +258,8 @@ public class MainView extends JPanel {
 			south.setLayout(new BorderLayout());
 			south.add(new JLabel(), BorderLayout.EAST);
 			JPanel south_center = new JPanel();
-			south_center.setLayout(new GridLayout(1, 9));
-			for (int i = 16; i >= 10; i--) {
+			south_center.setLayout(new GridLayout(1, 7));
+			for (int i = 17; i >= 11; i--) {
 				south_center.add(pcon_custom[i]);
 			}
 			south.add(south_center, BorderLayout.CENTER);
@@ -261,18 +267,17 @@ public class MainView extends JPanel {
 			add(south, BorderLayout.SOUTH);
 
 			setVisible(true);
-			setSize(1800, 1000);
-			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setSize(1920, 1080);
+			setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
+//			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setTitle("좌석 확인");
+
 		}
 
 		// custom버튼 클릭시 이벤트
 		public void actionPerformed(ActionEvent e) {
 
 			JButton o = (JButton) e.getSource();
-
-			if (o == bconfirm) {
-				CreateDialog();
-			}
 
 		}
 	}
@@ -284,47 +289,77 @@ public class MainView extends JPanel {
 			Thr_usingtime ut = new Thr_usingtime(cus_index);
 
 			if (ov == bstart) {
-				if (starttime[cus_index] == 0) {
-					ut.start();
+				if (cus_index == 0) {
+					JOptionPane.showConfirmDialog(null, "팔찌 번호를 먼저 지정해주세요.");
+				} else if (seat_num[cus_index] == 0) {
+					JOptionPane.showConfirmDialog(null, cus_index + "번 손님께 지정된 좌석이 없습니다.좌석을 지정해주세요.");
+					new confirmSeat();
+				} else if (starttime[cus_index] != 0) {
+					JOptionPane.showConfirmDialog(null, "이미 낚시를 진행중인 손님 입니다.");
 				}
-				timeStart();
 			} else if (ov == bend) {
 				timeEnd();
+			} else if (ov == bconfirm) {
+				confirmSeat cs = new confirmSeat();
 			} else {
-				for (int i = 0; i < max; i++) {
-					if (bcustom[i] == ov) {
-						//번호 누를때 원래 눌렀던 번호 없애기
-					} else if (bcon_seat[i] == ov) {
-						 //버튼 눌렀을 때  좌석 번호와 고객번호에 테두리가 바뀐다. 
-							if (starttime[cus_index] == 0) {
-								int result = JOptionPane.showConfirmDialog(null,
-										String.valueOf(cus_index + 1) + "번 손님을 이자리에 지정하시겠습니까?", "자리지정",
-										JOptionPane.YES_NO_OPTION);
-								if (result == JOptionPane.YES_OPTION) {
-									// con_custom에 서 버튼 index는 좌석번호 =i이므로 seat_num[손님번호]= 손님의 좌석번호
-									if (cus_index == 0) {
-										JOptionPane.showConfirmDialog(null, "손님 번호를 지정하고 다시 와주세요");
-									}
-									seat_cusnum[i] = cus_index;//i에 좌석번호가 들어가면 seat_cusnum이 손님번호
-									//내가 선택한 버튼 index i (=좌석번호)를 cus_index에 줄게
-									cus_index=i;
-									seat_num[seat_cusnum[i]]=cus_index;// seat_num[seat_cusnum[i]]=cus_index(좌석번호);
-									noBorderSetting(cus_index);
-									//n번 손님의 좌석 번호 seat_num[n]=> seat_num[seat_cusnum[i]]=cus_index;
-									//함수 가져다 붙이기 ---------------------------------------------------------------------------------
-									//이용 시간이랑 팔찌번호만  가져와야겠다.
-									//테스트
-									System.out.println((seat_cusnum[i]+1) + "번 손님 의 좌석 : " +(i+1)+"번");
-									System.out.println((seat_num[seat_cusnum[i]]+1)+"=>좌석 번호       "+(seat_cusnum[i]+1) +"=>손님번호" );
-									//좌석 버튼에 손님 번호를 입력해줄거야
-									bcon_seat[cus_index].setText((seat_cusnum[cus_index]+1)+"번 손님 ");
-									//다른 상황이 오면 위험하니깐  
-									
-								}
-							}
-						
+				for (int i = 0; i <= max; i++) {
 
-						System.out.println(cus_index);
+					if (bcustom[i] == ov) {
+						bcustom[seat_cusnum[seat_index]].setBorder(new LineBorder(Color.BLACK, 1));
+						bcustom[cus_index].setBorder(new LineBorder(Color.BLACK, 1));
+						cus_index = i;
+						bcustom[cus_index].setBorder(new LineBorder(Color.RED, 3));
+						// 번호 누를때 원래 눌렀던 번호 없애기
+					} else if (bcon_seat[i] == ov) {
+						// 버튼 눌렀을 때 좌석 번호와 고객번호에 테두리가 바뀐다.
+						bcon_seat[seat_index].setBorder(new LineBorder(Color.BLACK, 1));
+//						bcustom[sea].setBorder(new LineBorder(Color.BLACK,1));
+						seat_index = i;
+						bcon_seat[seat_index].setBorder(new LineBorder(Color.YELLOW, 3));
+						if (i == 0 | cus_index == 0) {
+							JOptionPane.showConfirmDialog(null, "지정된 손님이 없습니다.");
+						} else if (i != 0) {
+							if (bcon_seat[i].getText() == "") {
+								if (starttime[cus_index] == 0) {
+									bcustom[cus_index].setBorder(new LineBorder(Color.BLACK, 1));
+									int result = JOptionPane.showConfirmDialog(null, cus_index + "번 손님을 이자리에 지정하시겠습니까?",
+											"자리지정", JOptionPane.YES_NO_OPTION);
+									if (result == JOptionPane.YES_OPTION) {
+										if (starttime[seat_cusnum[seat_index]] == 0) {
+											// con_custom에 서 버튼 index는 좌석번호 =i이므로 seat_num[손님번호]= 손님의 좌석번호
+											seat_cusnum[seat_index] = cus_index;// i에 좌석번호가 들어가면 seat_cusnum이 손님번호
+											// 내가 선택한 버튼 index i (=좌석번호)를 cus_index에 줄게
+											seat_num[cus_index] = seat_index;// seat_num[seat_cusnum[i]]=cus_index(좌석번호);
+											// n번 손님의 좌석 번호 seat_num[n]=> seat_num[seat_cusnum[i]]=cus_index;
+											// 함수 가져다 붙이기
+											// ---------------------------------------------------------------------------------
+											// 이용 시간이랑 팔찌번호만 가져와야겠다.
+											// 테스트
+//									System.out.println((seat_cusnum[seat_index]+1) + "번 손님 의 좌석 : " +(seat_index+1)+"번");
+//									System.out.println((seat_num[seat_cusnum[seat_index]]+1)+"=>좌석 번호       "+(seat_cusnum[seat_index]+1) +"=>손님번호" );
+											// 좌석 버튼에 손님 번호를 입력해줄거야
+											bcon_seat[seat_index].setText(seat_cusnum[seat_index] + "번 손님 ");
+											bcustom[cus_index].setBorder(new LineBorder(Color.RED, 3));
+											// 다른 상황이 오면 위험하니깐
+											if (starttime[cus_index] == 0) {
+												ut.start();
+											}
+											timeStart();
+										}
+									}
+								} else if (seat_num[cus_index] == 0) {
+									JOptionPane.showConfirmDialog(null,
+											(cus_index) + "번 손님은 게임은 진행 중이나 지정된 좌석이 없는 손님입니다.");
+								} else if (seat_num[cus_index] != 0) {
+									JOptionPane.showConfirmDialog(null, cus_index + "번 손님은 이미 지정된 좌석이 있습니다.");
+								}
+
+							} else {
+								bcustom[cus_index].setBorder(new LineBorder(Color.BLACK, 1));
+								bcustom[seat_cusnum[seat_index]].setBorder(new LineBorder(Color.RED, 3));
+
+							}
+						}
 					}
 
 				}
@@ -333,7 +368,7 @@ public class MainView extends JPanel {
 	}
 
 	public class Thr_usingtime extends Thread {
-		long time[] = new long[max];
+		long time[] = new long[max + 1];
 		int index = 0;
 
 		boolean stop = true;
@@ -352,11 +387,12 @@ public class MainView extends JPanel {
 						String sec = String.valueOf(time[index] % (60 * 60) % 60);
 						String min = String.valueOf(time[index] % (60 * 60) / 60);
 						String hours = String.valueOf(time[index] / (60 * 60));
-						lcon_usingtime[index].setText(hours + "시" + min + "분" + sec + "초");
+						lcon_usingtime[seat_num[index]].setText(hours + "시" + min + "분" + sec + "초");
 					} else if (endtime[index] != 0) {
-						stop = false;
+						lcon_usingtime[seat_num[index]].setText("이용시간");
 						endtime[index] = 0;
-						lcon_usingtime[index].setText("이용시간");
+						stop = false;
+
 						return;
 					}
 
@@ -407,12 +443,15 @@ public class MainView extends JPanel {
 			usinghours = 0;
 			usingmin = 0;
 			usingsec = 0;
+			bcon_seat[seat_num[cus_index]].setText("");
+			seat_cusnum[seat_num[cus_index]] = 0;
+			seat_num[cus_index] = 0;
 		}
 	}
-	public void noBorderSetting(int seat) {
-		peach[seat].setBorder(null);// 다른 버튼 클릭하면 원래대로
-		peach[seat_cusnum[seat]].setBorder(new LineBorder(Color.RED, 3));
-	}
 }
-
-//		.setBorder(new LineBorder(Color.RED, 3));
+//	}
+//	public void getItemname() throws Exception {
+//		MainModel mm= new MainModel();
+//		
+//	Itemname = mm.itemname();
+//	}

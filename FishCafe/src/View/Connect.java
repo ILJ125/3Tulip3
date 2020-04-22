@@ -29,10 +29,8 @@ public class Connect extends JFrame {
 	JButton loginBtn = new JButton("로그인");
 
 	JButton idpwSearchBtn = new JButton("직원 정보");
-	
 	int confirm =0;
 	public Connect() {
-
 		super("로그인 창!");
 
 		this.setContentPane(loginPanel);
@@ -98,11 +96,12 @@ public class Connect extends JFrame {
 
 			if (id.equals("kosmo") && pw.equals("kosmo")) {
 
-//				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
+				JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.OK_OPTION);
 				confirm = 1;
 				System.out.println(confirm);
 				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				fg=new Fishing_Ground();
+				setVisible(false);
 				return;
 			}
 			JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
