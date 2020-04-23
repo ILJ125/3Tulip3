@@ -3,14 +3,11 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -47,6 +44,7 @@ public class EventView extends JPanel {
 	public EventView() {
 		make();
 		printSplst();
+		input();
 		addLayout();
 		eventProc();
 	}
@@ -154,12 +152,43 @@ public class EventView extends JPanel {
 			add(right);
 			
 		}
+		void input() {
+			ArrayList data1 = new ArrayList();
+			ArrayList temp2 = new ArrayList();
+			String type[]= {"메기","철갑상어","비단 잉어"};
+			int points[]= {2000,10000,5000};
+//			for(int i =0; i<3;i++) {
+//				System.out.println(type[i]
+//);			}
+			
+			
+			for(int i =0; i<3;i++) {
+				temp2.add(type[i]);
+				System.out.println(temp2.get(0));
+				temp2.add(points[i]);
+				System.out.println(temp2.get(1));
+				data1.add(temp2);
+//				
+			}
+			for(int i=0;i<3;i++) {
+				ArrayList eveni =new ArrayList();
+				eveni.add(data1.get(i));
+				for(int j=0;j<2;i++) {
+//					System.out.println(eveni.get(j));
+				}
+			}
+			
+			special.arrsplst = data1;
+			tbevtspecial.setModel(special);
+			special.fireTableDataChanged();
+			
+		}
 	
 	//테이블 데이터 관리
 	class TableDataSpeciallst extends AbstractTableModel{
 		String [] columnName = { "종류","포인트"};
 		ArrayList arrsplst = new ArrayList(); 
-		
+			
 		public int getColumnCount() {
 			// 행의 갯수 가져오는 함수
 			return columnName.length;
