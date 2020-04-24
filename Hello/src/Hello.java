@@ -1,16 +1,14 @@
-
+import java.text.SimpleDateFormat;
 
 public class Hello {
 
 	public static void main(String[] args) {
-	
-		 {
 
-		     String i="+";
-		     
-		     System.out.println(3+2);
-		 }
+		{
+		System.out.println((double)1/24*(Math.random() * 24));
+		}
+		
 
 	}
-	
+
 }
