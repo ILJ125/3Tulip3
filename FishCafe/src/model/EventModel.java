@@ -51,9 +51,10 @@ public class EventModel {
 		con = DriverManager.getConnection(url, user, pass);
 		String sql = "";
 		if (no == 1) {
-			sql = "update client set point=point + ? where client_id = ? ";
+			//ex) 20번 팔찌를 사용한 고객은 무수히  많다. 현재 게임을 진행중인 즉 팔찌를 가지고있는 손님의 포인트를 추가 ,사용 적용한다.
+			sql = "update client set point=point + ? where client_id = ? and end_time is null";
 		} else {
-			sql = "update client set point=point - ? where client_id = ? ";
+			sql = "update client set point=point - ? where client_id = ? and end_time is null";
 		}
 		PreparedStatement st = con.prepareStatement(sql);
 
