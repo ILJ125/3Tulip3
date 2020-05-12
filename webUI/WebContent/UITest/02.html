@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>03_for_z.html</title>
+</head>
+<body>
+	<script type="text/javascript">
+		document.write('<table border="2">');
+		for (var i = 1; i <= 5; i++) {
+
+			document.write('<tr>');
+			for (var j = i; j < i+5 ; j++) {
+				document.write('<td>' + j + '</td>');
+			}
+			document.write('</tr>');
+		}
+		document.write('</table>');
+	</script>
+
+</body>
+</html>

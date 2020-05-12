@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Number 형과 형변환 </title>
+<script type="text/javascript">
+
+
+// 1. 숫자 형식 메소드 
+var su = 123.456789;
+//지수형 언어 1.23456789 * 10^2
+document.writeln( su.toExponential(2)  + "<br/>" );	
+document.writeln( su.toFixed(3)  + "<br/>" );//소수점 자릿수로 했을 때	반올림
+document.writeln( su.toFixed(7) + "<br/>" );	
+document.writeln( su.toPrecision(6)  + "<br/>" );//전체 자릿수로 했을 때 반올림
+document.writeln( su.toPrecision(10)  + "<br/>" );	
+
+//-------------------------------------------------
+// 2. 형변환
+var n ='0770';
+document.writeln(Number(n) + '<br/>');
+document.writeln(parseInt(n) + '<br/>');
+document.writeln(parseFloat(n) + '<br/>');
+
+//
+var n ='123abc';
+document.writeln(Number(n) + '<br/>'); //NaN : Not a Number
+document.writeln(parseInt(n) + '<br/>');
+document.writeln(parseFloat(n) + '<br/>');
+
+//*************
+//number + string = string
+//nummber - string = number
+document.writeln(123 + '4'); 
+document.writeln(typeof (123 + '4')); 
+document.writeln('<hr/>');
+document.writeln(123-'4');
+document.writeln(typeof (123-'4'));
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

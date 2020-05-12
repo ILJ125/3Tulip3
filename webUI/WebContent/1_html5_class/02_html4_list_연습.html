@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>02_html5_list_연습.html</title>
+</head>
+<body>
+
+<h2>현재이페이지에서 출력</h2>
+<img src = '../images/sample/sensitive.jpg'>
+<audio src = '/webUI/media/음악.mp3' controls = "controls"></audio>
+
+<video height = "200" width = "200" controls>
+<source src = "/webUI/media/동영상.mp4">
+</video>
+
+
+<iframe src = 'http://www.ikosmo.co.kr' height = "200" width = "200"></iframe>
+
+<hr/>
+<!-- 상대경로 -->
+
+<li><a href = '../images/sample/sensitive.jpg' target = "_e">이미지파일</a></li>
+<li><a href='../media/음악1.mp3'target = "_m">음악파일</a></li>
+<li><a href='../media/동영상.mp4'target = "_d">동영상파일</a></li>
+<li><a href='../media/DB 명령어.txt'target = "_d">문서</a></li>
+
+<ul>
+<li><a href = '/webUI/images/sample/sensitive.jpg' target = "_e">이미지파일</a></li>
+<li><a href='/webUI/media/음악.mp3'target = "_m">음악파일</a></li>
+<li><a href='/webUI/media/동영상.mp4'target = "_d">동영상파일</a></li>
+<li><a href='../media/DB 명령어.txt'target = "_d">문서</a></li>
+
+</body>
+</html>

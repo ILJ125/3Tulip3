@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date 객체</title>
+<script type="text/javascript">	
+ 	
+	var d = new Date('2020/05/03');
+// 	var d = new Date();//오늘
+	document.writeln( d  + '<br/>');
+	document.writeln( d.getYear()  + '<br/>');//반드시 fullyear 로 줘야함
+	document.writeln( d.getFullYear()  + '<br/>');
+	document.writeln( d.getMonth()  + '<br/>');//0월 부터 센다.
+	document.writeln( d.getDate()  + '<br/>');
+	document.writeln( d.getDay()  + '<br/>');//0=일,1=월 ~
+	
+	var today = new Date();
+	today.setFullYear(2020);
+	today.setMonth(4);
+	today.setDate(1);
+	document.writeln('<hr/>'+today+'<br/>');
+	document.writeln('<hr/>'+today.toLocaleString() +'<br/>');
+	document.writeln('<hr/>'+today.toGMTString() +'<br/>');
+	document.writeln('<hr/>'+today.toDateString() +'<br/>');
+	document.writeln('<hr/>'+today.toString() +'<br/>');
+
+
+	//date 연산
+	today.setMonth(today.getMonth() -3);
+	document.writeln('<hr/>'+today.toLocaleString() +'<br/>');
+	
+	today.setMonth(today.getMonth() +3);//원래 날짜로 되돌림
+	today.setDate(today.getDate()-20);
+	document.writeln(today.toLocaleString() +'<br/>');
+	
+
+	
+	
+	
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

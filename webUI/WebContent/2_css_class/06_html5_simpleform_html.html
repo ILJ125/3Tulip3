@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<!-- 외부css 연결 -->
+<link href='./css/myform.css' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<form action=''method='post'>
+	<fieldset>
+		<legend>
+		회원가입
+		</legend>
+		
+		<ol>
+		<li>
+			<label for='irm'> 이름</label><input id='irm' name='irm' type='text'/>
+		</li>
+		
+		<li>
+		<label for='gender'> 성별</label>
+		<input type='radio' name='gender' value='남자' checked="checked">남자
+		<input type='radio' name='gender' value='여자'>여자
+		</li>
+		
+		<li>
+		<label for='job'> 직업</label>
+		<select name="job">
+   			 <option value="프로그래머">프로그래머</option>
+    		<option value="학생">학생</option>
+    		<option value="회사원">회사원</option>
+   			 <option value="기타">기타</option>
+		</select>
+		</li>
+		
+		<li>
+		<label for='hobby'> 취미</label>
+		<input type='checkbox' name = 'hobby' value='잠자기' />
+		<label for='hobby'> 잠자기</label>
+		<input type='checkbox' name = 'hobby' value='먹기'/>
+		<label for='hobby'> 먹기</label>
+		<input type='checkbox' name = 'hobby' value='숨쉬기'/>
+		<label for='hobby'> 숨쉬기</label>
+		<input type='checkbox' name = 'hobby' value='멍대리기'/>
+		<label for='hobby'> 멍때리기</label>
+		</li>
+		
+		<li>
+		<label for='have'> 애인</label>
+		<input type='radio' name='have' value='있다' checked="checked">있다
+		<input type='radio' name='have' value='없다'>없다
+		</li>
+		
+		<li>
+		<!--웹과 앱 -->
+		<label for = ''>여행하고싶은나라?</label><input type ='text' list='countries'>
+		<datalist id='coutries'>
+		<option value="가나">가나</option>
+    	<option value="탐라국">탐라국</option>
+		</datalist>
+		
+		</li>
+		
+		<li>
+		<input type='submit' value='확인'/>
+		<input type='reset' value='취소'/>
+		</li>
+		
+		</ol>
+	</fieldset>
+</form>
+</body>
+</html>

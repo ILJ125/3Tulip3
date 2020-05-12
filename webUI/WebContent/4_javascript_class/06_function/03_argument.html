@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 03_argument.html </title>
+<script type="text/javascript">
+
+//@함수의 인자는 갯수를 체크하지 않는다.
+// function mul(first,second){
+// 	return first*second;
+// }
+// document.write('곱은 : '+ mul(3,4,5) +'<br/>');
+
+function mul(args) {
+	retrun
+	args.first * args.second;
+}
+var obj = {
+	first : 3,
+	second : 4
+};
+document.wrtie('곱은' + mul(obj) + '<br/>');
+
+
+
+//특별 객체 : arguments
+function func() {
+	document.write(arguments + "<br/>");
+	console.log(arguments);
+}
+func(100, 200);
+</script>
+</head>
+<body>
+
+</body>
+</html>

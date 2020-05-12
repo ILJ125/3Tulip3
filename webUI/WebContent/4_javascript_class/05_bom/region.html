@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		win = window.open('region2.html', "창이다", 'width=600, height=500');
+		document.getElementById('selector').onchange = function() {
+			win.second.secondtext.value = this.value;
+		}
+	}
+</script>
+</head>
+<body>
+	<form name='first'>
+		<input type='text' name='firsttext'><br /> <select
+			id='selector'><option>::선택::</option>
+			<option id='seoul'>서울시</option>
+			<option id='ulsan'>울산시</option></select>
+
+	</form>
+</body>
+</html>

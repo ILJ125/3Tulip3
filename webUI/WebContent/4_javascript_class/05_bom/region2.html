@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function() {
+		var radio = document.resion2.small;
+		for (var i = 0; i < radio.length; i++) {
+			radio[i].onclick = function() {
+				opener.first.firsttext.value = this.value;
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<form name="second">
+		<input type='text' name='secondtext' value=""/>
+		<br/> 
+		<input type="radio" name="small" value='가산'> 가산 <br> <input
+			type="radio" name="small" value='판교'> 판교<br> <input
+			type="radio" name="small" value='부평'> 부평 <br>
+	</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//-------------------------------------------------------------------------
+//  즉시 실행 함수
+//	 - 함수를 변수에 직접 할당하는 것이 아니라 함수의 결과물을 할당하기 위해 즉시 실행 함수를 사용(?)
+//	- 추후에 클로져와 관련
+
+// var f= function(num){
+// 	document.write('num'+num+'<br/>');
+// }(10);
+
+// var func=f(10);
+
+var byensu =function(num){
+	return function(){
+		--num;
+		document.write('num'+num+'<br/>');
+	};
+}(10);
+
+function add(a,b,callbackfunc){
+	var result = a+b;
+	callbackfunc(result);
+	var count =0;
+	return function(){
+		count++;
+		return count+"호출";
+	};
+}
+add(10,20,function(re){
+	document.write('결과='+re+"<br/>");
+});
+
+var reVar = add(10,20,function(re){
+	document.write('결과='+re+'<br/>');
+})
+document.write("리턴받은 함수 결과 : "+reVar()+'<br/>');
+document.write("리턴받은 함수 결과 : "+reVar()+'<br/>');
+document.write("리턴받은 함수 결과 : "+reVar()+'<br/>');
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

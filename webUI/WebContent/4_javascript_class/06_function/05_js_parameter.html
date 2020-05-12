@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> 파라메터 인자</title>
+	<script>
+
+// 	call by value : 함수의 인자가 기본형인 경우 복사해서 넘어가기 때문에 값은 안바낌
+// 	call by reference : 함수의 인자가 참조형인 경우// 인자로 넘어갈때 주소가 넘어간다.
+// 	var pri =10;
+// 	function priParam(pri){
+// 		pri--;
+// 		return pri;
+// 	}
+	
+// 	document.write('기본형인자 1>'+ priParam(pri) +'<br/>');//9
+// 	document.write('기본형인자 2>'+ pri +'<br/>');//10 기본형이어서  복사해서 인자로 적용됨
+	
+	var ref=[1,2,3,4,5];
+	function refParam(ref){
+		ref.pop(); //맨 마지막 에 들어간거 빠져 나감 ㅠ 
+		return ref;
+	}
+	//스택구조 (LIFO)로 취급 //큐 구조 (FIFO)로 취급 :shift();
+	document.write('참조형인자 1>'+ refParam(ref) +'<br/>');//1234
+	document.write('참조형인자 2>'+ ref +'<br/>');//1234
+	
+	</script>
+</head>
+
+<body>
+
+  
+ </body>
+</html>

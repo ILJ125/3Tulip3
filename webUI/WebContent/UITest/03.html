@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function CheckWeight(name,height,weight){
+	this.name=name;
+	this.height=height;
+	this.weight=weight;
+	this.getInfo=function(){
+		return this.name+" "+this.height+" "+this.weight;
+	};
+
+	this.getResult=function(){
+	var min =(this.height-100)*0.9-5;
+	var max =(this.height-100)*0.9+5;
+	if(this.weight<min){return "미달";}
+	else if(this.weight<max){return "표준";}
+	else {return "비만";}
+	}
+};
+var kim = new CheckWeight( '김길동', 160, 55 );
+var lee  = new CheckWeight( '이길동', 180, 95 );
+
+
+
+document.write(  kim.getInfo() );
+document.write(  kim.getResult() );
+
+document.write(  lee.getInfo() );
+document.write(  lee.getResult() );
+</script>
+</head>
+<body>
+
+</body>
+</html>

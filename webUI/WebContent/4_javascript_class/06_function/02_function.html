@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>리터럴 함수</title>
+</head>
+<body>
+	<script>
+	
+	// 1.function 명령은 정적인 구조이고(= 읽는 순간 메모리에 올려놓고, 실행할 때 부른다.), 
+	// 2.Function 생성자와 함수리터럴은 실행시 판단한다. (= 실행시 함수를 인지한다. 선언이 먼저 되고 사용되어야 한다.)
+// 	document.writeln('삼각형의 면적은 2 ' +  triangle(4,3) + '</br>');
+// 	function triangle ( base, height ){
+// 				return base * height / 2;
+// 	}
+	
+// 	var triangle = function( base, height ){
+// 		alert( this.base );
+// 		return base * height / 2;
+// 	} 	
+
+// 		document.writeln('삼각형의 면적은 ' +  triangle(4,3) + '</br>');		
+// 		document.writeln('triangle 값 ' +  triangle + '</br>');
+// 		document.writeln('triangle type은 ' + typeof triangle + '</br>');		
+	
+	// @ 함수는 데이터형의 일종이다.
+	function doA(){
+		document.write('함수A <br/>')
+	}
+	function doB(){
+		document.write('함수B <br/>')
+	}
+	
+	var arr=[doA,doB];
+	console.log('arr 값 '+arr);
+	arr[0](); //맞는 코딩
+	
+	//@함수ㅏ 다른  함수의 인자나 리턴값이 될 수 있다.
+	//f4는 함수 명 f1,f2,f3 매개변수 명
+	function f4(f1,f2,f3){
+		return f3(f1()+f2());
+	}
+// 	var f1=function(){return 2;};
+// 	var f2=function(){return 2;};
+// 	var f3=function(){return 2;};
+
+	
+	var result = f4(function(){return 2;},function(){return 3;},function(a){return a*a});
+	document.write(result);
+	
+	</script>
+</body>
+</html>

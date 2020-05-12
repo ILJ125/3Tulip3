@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('btn').onclick = function() {
+			// 		document.myForm.txt0.value='데이타1';
+			// 		myForm.txt1.value='데이타2';
+			// 		document.forms[0].txt2.value='data3';
+			// 		documet.myForm['txt4'].value='Data4';
+			//각각 input 태그에 "데이타"라는 값을 지정
+			for (var i = 0; i < 4; i++) {
+				myForm["txt" + i].value = "데이타";
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<form name='myForm'>
+		첫번째 : <input type='text' name='txt0'><br /> 두번째 : <input
+			type='text' name='txt1'><br /> 세번째 : <input type='text'
+			name='txt2'><br /> 네번째 : <input type='text' name='txt3'><br />
+		<input type='button' value='값지정' id='btn'>
+	</form>
+</body>
+</html>

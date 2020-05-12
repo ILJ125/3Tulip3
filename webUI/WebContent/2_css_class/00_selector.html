@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>연습</title>
+
+
+<style type="text/css">
+	/*1.가중치에 다른 우선순위*/ 
+	
+	#point100 {color : blue;}/*100*/
+	.point10 {color : cyan;}/*10*/
+	div {color : #FFAA22}/*1*/
+	div {color : green;} /*1*/
+	
+	div#point100 {color : yellow;}/*101*/
+	body div#point100{color: gray;}/*102*/
+	
+	/*2.속성값 선택*/
+	
+	/*	-input 요소의 첫번째 요소 태두리 변경
+		-input 요소의 마지막 요소 태두리 변경
+		-input 요소의 5번째 요소 태두리 변경
+		-input 요소의 뒤에서 두번째 요소 태두리 변경
+	*/
+	
+	input[type=text]{border : 2px solid #455622} 
+	input:first-of-type {border : 2px solid #450022} 
+	input:nth-child(5) {border : 2px solid #FFFF22} 
+	input:last-of-type {border : 2px solid #FF0022}
+	input:nth-last-child(2) {border : 2px solid #FF00FF}
+	
+	
+	</style>
+</head>
+<body>
+
+	
+	<div id="point100" class="point10">안녕하세요</div>
+
+	<p>
+		<input type="text" value="입력1"> <input type="checkbox">
+		선택 <input type="radio" name="rd" checked="checked"> 예 <input
+			type="radio" name="rd"> 아니오 <input type="text" value="입력2"
+			disabled="disabled"> <input type="button" value="확인">
+		<input type="button" value="취소">
+	</p>
+
+
+</body>
+</html>

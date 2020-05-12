@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>자바스크립트 함수 4가지</title>
+	<script>
+	// 1. function 명령
+// 	function triangle(base,height){
+// 		return (base*height)/2;
+		
+// 	}
+// 	document.write('삼각형의 면적 ='+triangle(3,4)+"<br/>")
+	// 2. 함수리터럴(함수도 변수의 값이다.)   * 리터럴 : 변수의 값 
+// 	var triangle =function(base,height){
+// 		return (base*height)/2;
+// 	 	};
+// 	 	document.write('삼각형의 면적 ='+triangle(4,3)+"<br/>")
+
+	// 3. Function 생성자		
+// 	var triangle = new Function('base','height','return base*height/2;');//생성자함수를 부름
+// 	 	document.write('삼각형의 면적3 ='+triangle(4,3)+"<br/>")
+
+	// 4. 애로우함수
+	var triangle =(base, height)=>{return base *height/2;}
+	 	document.write('삼각형의 면적4 ='+triangle(4,3)+"<br/>")
+
+	
+	</script>
+</head>
+
+<body>
+
+  
+ </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>자바스크립트 변수와 범위</title>
+	<script>
+// 	글로벌 변수와 지역변수
+// 	-var 선언하지 않으면 글로벌 변수가 된다.
+// 	var scope='글로벌 변수';
+// 	function getValue(){
+// 		document.write('0>'+scope+ '<br/>');//지역변수가 있다는걸 알고있어 근데 아직 선언전이죠?
+// 		var scope ='지역변수';
+// 		return scope;
+// 	}
+// 	document.write('1>'+ getValue()+'<br/>');
+// 	document.write('2>'+scope);
+
+//지역변수 : 함수 블럭 안에 변수 
+// if(true){
+// 	var i =100;//글로벌 변수
+// }
+// document.write('i='+i);
+
+for(var j=0; j<3; j++){}
+for(var j=0; j<3; j++){}
+
+// var j=1;
+// var j=2;
+
+document.write('j='+j);
+	</script>
+</head>
+
+<body>
+
+  
+ </body>
+</html>

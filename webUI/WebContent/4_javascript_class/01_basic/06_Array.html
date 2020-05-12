@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Array 객체 </title>
+<script type="text/javascript">		
+
+// 1. 배열의 함수 확인
+
+	var arr = ['김태희','송혜교','전지현','김고은','임수정'];
+	document.writeln( arr + '<br/>');
+	document.writeln( arr.join('/') + '<br/>');//김태희 / 송혜교/ ... 등
+	document.writeln( arr.slice(3) + '<br/>');//3부터 ~ 끝까지 , 김고은 ,임수정 
+	document.writeln( arr.slice(1,3) + '<br/>');//송혜교,전지현 
+
+	document.writeln( arr.reverse() + '<br/>');//반대로 애들 뽑아짐
+	document.writeln( arr.sort() + '<br/>');//정렬
+	
+	//*********[주의] sort()가 문자열로 변환 후에 정렬  15 = 1+5 앞에문자가 1이다.
+	var arr2 =[5,15,20,9];
+	document.writeln(arr2.sort() + '<br/>');
+	
+	var arrTemp =['강동원','박서준'];
+	document.writeln(arr.concat(arrTemp)+'<br/>');
+	document.writeln(arr+'<br/>');
+	// 2. 배열을 스택과 큐로 이용하기
+	//lifo:stack : 나중에 들어간게 먼저 나온다. 용어: push,pop
+	 	var data = [];
+		data.push('박서준');
+		data.push('현빈');
+		data.push('박보검');
+		document.writeln( data.pop() + "<br/>");
+		document.writeln( data.pop() + "<br/>");
+		document.writeln( data.pop() + "<br/>");
+		document.writeln( data.pop() + "<hr/>");
+		
+		
+		//shift 로 빼면 큐로 빼겠다.
+		var data2 = [];
+		data2.push('박소담');
+		data2.push('김고은');
+		data2.push('이지은');
+		document.writeln( data2.shift() + "<br/>");
+		document.writeln( data2.shift() + "<br/>");
+		document.writeln( data2.shift() + "<br/>");
+		document.writeln( data2.shift() + "<hr/>");	 
+			
+	// 3. es6
+			document.writeln(arr+'<br/>');
+			//1번 위치에 3<= <5 즉 3,4번 자리에 아이를 3번 위치부터 놔두겠다요
+			document.writeln( arr.copyWithin(1,3,5) + "<hr/>");	 
+			document.writeln( arr.fill('박소담',1,3) + "<hr/>");//1,2번을 박소담으로 채우세요	 
+
+
+	
+	
+
+	//-------------------------------------------- 나중에 함수부붙에서 하자
+	// 4. 콜백함수
+	// (1) forEach 메소드 :  배열의 내용을 순서대로 처리
+	//			array.forEach(function(요소의값, 인덱스번호, 원래의배열){})
+
+	
+	// (2) map 메소드 : 배열을 지정된 규칙으로 가공하기
+
+	
+	
+	// (3) some 메소드 : 배열에 조건이 일치하는 요소가 있는지 확인
+	//     every 메소드 : 배열에 조건이 모든 요소에 일치하는지 확인
+	/* 	var data3 = [1, 3, 5, 7, 9];
+		var result = data3.some(function(value, index, array){
+			return value%3===0;
+		});
+		if (result){
+			document.writeln( " 3의 배수가 발견 <br/>");
+		}else{
+			document.writeln( " 3의 배수가 없음 <br/>");
+		}
+		var data3 = [3, 6, 9, 30];
+		var result = data3.every(function(value, index, array){	
+			return value%3===0;
+		});
+		if (result){
+			document.writeln( " 모든 요소가 3의 배수 <br/>");
+		}else{
+			document.writeln( " 모든 요소는 3의 배수가 아님 <br/>");
+		} */
+
+	// (4) filter 메소드 : 배열의 내용을 특정의 조건으로 필터링
+
+
+	
+	
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

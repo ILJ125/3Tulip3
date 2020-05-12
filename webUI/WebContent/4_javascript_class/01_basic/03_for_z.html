@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>03_for_z.html</title>
+</head>
+<body>
+	<script type="text/javascript">
+		document.write('<table border="2">');
+		for (var i = 0; i < 5; i++) {
+
+			document.write('<tr>');
+			for (var j = i * 5; j < (i * 5) + 5; j++) {
+				document.write('<td>' + (j + 1) + '</td>');
+			}
+			document.write('</tr>');
+		}
+		document.write('</table>');
+//for 문 하나 만
+		document.write('<table border="2">');
+		for (var i = 0; i < 25; i++) {
+			if (i % 5 == 0)
+				{document.write('<tr>');}
+			document.write('<td>' + (i + 1) + '</td>');
+			if (i % 5 == 4) {document.write('</tr>');}
+
+		}
+		document.write('</table>');
+	</script>
+
+</body>
+</html>
