@@ -10,8 +10,14 @@
 
 <%	
 // 1. 클라이언트로부터 Cookie를 얻어옴 
+Cookie c[]=request.getCookies();
 // 2. 쿠키 이름 중에 "yourid"가 있는지 검색
-// 3. 해당하는 쿠키가 있다면 그 이름과 새 값으로 새 쿠키를 만들고 전송
+for(int i=0;c!=null&&i<c.length;i++){
+		if(c[i].getName().equals("knh")){
+			// 3. 해당하는 쿠키가 있다면 그 이름과 새 값으로 새 쿠키를 만들고 전송
+			response.addCookie(new Cookie(c[i].getName(),"목말라"));
+		}
+	}
 
 %>
 

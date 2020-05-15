@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
 <html> 
-<head><title> 우리 쇼핑몰 </title></head> 
+<head><title> 우리 쇼핑몰 </title></head>
+ 
 <body> 
  
 <table><tr><td><img src='imgs/1020.jpg' width='180'> 

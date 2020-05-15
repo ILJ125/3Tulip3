@@ -63,6 +63,9 @@ $(function(){
 		  });
 	  }); 
 	  
-	//6.   
+	//6.  전체메뉴 눌렀을 때
+	  $('#total_btn').click(function(){
+		  
+	  });
 
 });

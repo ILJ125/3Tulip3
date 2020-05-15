@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import='temp.*'%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,23 +8,32 @@
 </head>
 <body>
 <%
-
-	
 	// 이전화면 폼에서 넘겨받는 값
-	String user = request.getParameter("user");
-	String pass = request.getParameter("pass");
+	String user = request.getParameter("User");
+	String pass = request.getParameter("Pass");
 
+	/*
 	// 실제로는 DB에서 가져와야하는 값
-	String saveUser = "silvina";
-	String savePass = "1234";
-
+	String saveUser = "test";
+	String savePass = "test";
 	// user, password가 같을 때 로그인 성공, 그렇지 않으면 로그인 실패
-	if( ( user.equals(saveUser) ) && ( pass.equals(savePass) ) ){
-		
+	// 	if( (user.equals(saveUser))&&(pass.equals(savePass))) {
+	*/
+	
+	//DB연결
+	//user,pass vo에 저장
+	tempVO vo = new tempVO();
+	vo.setId(user);
+	vo.setPass(pass);
+	//login 함수 호출(id&비밀 번호가 일치하면 true 불일치 false)
+	TempDao dao = TempDao.getInstance();
+	if( dao.login(vo)) {
 		//#############
 		// 1. 쿠키생성
+		Cookie c = new Cookie("login",user);
 		// 2. 쿠키속성 지정 ( 선택 )
 		// 3. 응답으로 쿠키전송
+		response.addCookie(c);
 %>
 					
 	<h2> <%= user %>님, 성공적으로 로그인하셨슴다...</h2>

@@ -4,10 +4,15 @@
 <%
 
 	//# 1."id"로 저장된 세션값을 얻어온다.
+	Object obj=session.getAttribute("id");
 	//# 2. 값이 null이라면 LoginForm.jsp로 페이지 이동
+	if(obj==null){
+		response.sendRedirect("LoginForm.jsp");
+		return;//밑에있는거 실행할 필요없어 라는 신호ㅊ
+	}else{
 	//# 3. null이 아니라면 String 형변환하여 변수에 지정
-	
-	
+		String temp=String.valueOf(obj);	
+	}
 %>
     
 <!DOCTYPE html>

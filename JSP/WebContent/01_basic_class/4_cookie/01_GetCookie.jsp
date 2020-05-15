@@ -12,9 +12,13 @@
 
 <%	
 	// 1. 클라이언트로부터 Cookie를 얻어옴 
-	
+	Cookie c[]=request.getCookies();
 	// 2. 쿠키 이름 중에 "yourid"가 있다면 그 쿠키의 값을 출력
-	
+	for(int i=0;c!=null&&i<c.length;i++){
+		if(c[i].getName().equals("knh")){
+			out.print(c[i].getValue());
+		}
+	}
 %>
 
 <br><a href="01_ChangeCookie.jsp"> 쿠키값 변경 </a><br/>
